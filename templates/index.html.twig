@@ -10,13 +10,13 @@
 	<style type = text/CSS>
 	.ui-grid-solo {
 	padding-top:.200em;
-    font-size: 16px;
-    line-height: 60px;
+    font-size: 18px;
+    line-height: 80px;
     font-weight: bold;
 	}
 	
 	.ui-grid-c[data-role=fieldcontain] {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 60px;
     font-weight: ;
 	}
@@ -108,7 +108,7 @@
 		<h2>Login</h2>
 	   Username <input type="text" name="login_username" id="login_username" value="">
        Password <input type="text" name="login_pass" id="login_pass" value="">
-        <button class="ui-btn" id="loginButton">Submit</button>
+        <button  id="loginButton" data-theme="b">Submit</button>
         
         
         
@@ -199,9 +199,10 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total, Eur: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, 
+									€: </label></div>
 									
-									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
+									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value="0"></div>	
 								</li>
 								
 								<li>
@@ -219,9 +220,9 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
-									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
+									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0"></div>
 								</li>
 								
 								<li>
@@ -239,9 +240,9 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
-									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
+									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0"></div>	
 								</li>
 						
 
@@ -261,8 +262,8 @@
 							
 								<li>
 									<div class="ui-block-a">
-										<input type="checkbox" name="checkbox-v-2d" id="checkbox-v-2d">
-										<label for="checkbox-v-2d">Small</label> 
+										<input type="checkbox" name="checkbox-v-2ny1" id="checkbox-v-2ny1">
+										<label for="checkbox-v-2ny1">Small</label> 
 									</div>
 								
 									<div class="ui-block-b">
@@ -274,7 +275,7 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total, Eur: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
 									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
 								</li>
@@ -282,8 +283,8 @@
 								
 								<li>
 									<div class="ui-block-a">
-										<input type="checkbox" name="checkbox-v-2e" id="checkbox-v-2e">
-										<label for="checkbox-v-2e">Medium</label> 
+										<input type="checkbox" name="checkbox-v-2ny2" id="checkbox-v-2ny2">
+										<label for="checkbox-v-2ny2">Medium</label> 
 									</div>
 								
 									<div class="ui-block-b">
@@ -295,15 +296,15 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
 									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
 								</li>
 								
 								<li>
 									<div class="ui-block-a">
-										<input type="checkbox" name="checkbox-v-2f" id="checkbox-v-2f">
-										<label for="checkbox-v-2f">Large</label> 
+										<input type="checkbox" name="checkbox-v-2ny3" id="checkbox-v-2ny3">
+										<label for="checkbox-v-2ny3">Large</label> 
 									</div>
 								
 									<div class="ui-block-b">
@@ -315,7 +316,7 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
 									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
 								</li>
@@ -326,6 +327,81 @@
 						</div><!-- /grid-c -->
 						
 					</li><!-- /collapsible New Yorker-->
+					
+					<li data-role="collapsible" data-iconpos="right" data-inset="false">
+					<h2>House Special</h2>
+										
+						<div class="ui-grid-c"  data-role="fieldcontain">
+						
+							<ul data-role="listview" data-theme="a">
+							
+								<li>
+									<div class="ui-block-a">
+										<input type="checkbox" name="checkbox-v-2hs1" id="checkbox-v-2hs1">
+										<label for="checkbox-v-2hs1">Small</label> 
+									</div>
+								
+									<div class="ui-block-b">
+										<div class="ui-grid-b" data-type="horizontal">
+											<div class="ui-block-a"><input type="button" id="addPizza" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
+											<div class="ui-block-b"><input type="text" id="pizzaQty" data-enhanced="true" value="0" style="width: 40px;"></div>
+											<div class="ui-block-c"><input type="button" id="removePizza" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
+											
+										</div>							
+									</div>
+									
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
+									
+									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
+								</li>
+								
+								
+								<li>
+									<div class="ui-block-a">
+										<input type="checkbox" name="checkbox-v-2hs2" id="checkbox-v-2hs2">
+										<label for="checkbox-v-2hs2">Medium</label> 
+									</div>
+								
+									<div class="ui-block-b">
+										<div class="ui-grid-b" data-type="horizontal">
+											<div class="ui-block-a"><input type="button" id="addPizza" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
+											<div class="ui-block-b"><input type="text" id="pizzaQty" data-enhanced="true" value="0" style="width: 40px;"></div>
+											<div class="ui-block-c"><input type="button" id="removePizza" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
+											
+										</div>							
+									</div>
+									
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
+									
+									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
+								</li>
+								
+								<li>
+									<div class="ui-block-a">
+										<input type="checkbox" name="checkbox-v-2hs3" id="checkbox-v-2hs3">
+										<label for="checkbox-v-2hs3">Large</label> 
+									</div>
+								
+									<div class="ui-block-b">
+										<div class="ui-grid-b" data-type="horizontal">
+											<div class="ui-block-a"><input type="button" id="addPizza" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
+											<div class="ui-block-b"><input type="text" id="pizzaQty" data-enhanced="true" value="0" style="width: 35px;"></div>
+											<div class="ui-block-c"><input type="button" id="removePizza" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
+											
+										</div>							
+									</div>
+									
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
+									
+									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
+								</li>
+						
+
+							</ul>
+						
+						</div><!-- /grid-c -->
+						
+					</li><!-- /collapsible House Special-->
 					
 					<li data-role="collapsible" data-iconpos="right" data-inset="false">
 						<h2>Custom</h2>
@@ -349,7 +425,7 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total, Eur: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
 									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
 								</li>
@@ -369,7 +445,7 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
 									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
 								</li>
@@ -389,7 +465,7 @@
 										</div>							
 									</div>
 									
-									<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 									
 									<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
 								</li>
@@ -436,7 +512,7 @@
 			<div id="sides">
 				<div class="ui-grid-solo">
 					<div class="ui-block-a">Sides and drinks</div>
-			</div>
+				</div>
 					
 				<ul data-role="listview" data-inset="false" >
 						<li data-role="collapsible" data-iconpos="right" data-inset="false">
@@ -461,7 +537,7 @@
 												</div>							
 											</div>
 											
-											<div class="ui-block-c"><label style="text-align:right;">total, Eur: </label></div>
+											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 											
 											<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
 										</li>
@@ -482,7 +558,7 @@
 												</div>							
 											</div>
 											
-											<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 											
 											<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
 										</li>						
@@ -512,7 +588,7 @@
 												</div>							
 											</div>
 											
-											<div class="ui-block-c"><label style="text-align:right;">total, Eur: </label></div>
+											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 											
 											<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
 										</li>
@@ -533,7 +609,7 @@
 												</div>							
 											</div>
 											
-											<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 											
 											<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
 										</li>	
@@ -553,7 +629,7 @@
 												</div>							
 											</div>
 											
-											<div class="ui-block-c"><label style="text-align:right;">total: </label></div>
+											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
 											
 											<div class="ui-block-d"><input type="text" id="pizzasPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
 										</li>	
@@ -598,10 +674,14 @@ class product {
 // define our products
 pizza1 = new product("Hawaiian", "small", 5.00, 0);
 pizza2 = new product("Hawaiian", "medium", 10.00, 0);
-pizza3 = new product("Hawaiian", "large", 15.00, 0);
+pizza3 = new product("Hawaiian", "large", 11.00, 0);
 
 drink1 = new product("Coca cola", "330ml", 1.00, 0);
+drink2 = new product("Fanta", "330ml", 1.00, 0);
+drink3 = new product("Sprite", "330ml", 1.00, 0);
 
+side1 = new product("Potato wedges", "one", 1.00, 0);
+side2 = new product("Garlic bread", "one", 1.00, 0);
 
 $( "#addPizza" ).click(function() {
        if(pizza1.qty < 100) { // add a little validation
