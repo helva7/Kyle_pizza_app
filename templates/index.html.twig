@@ -120,12 +120,70 @@
 
 <div data-role="page" id="driver" data-theme="a">
 
-       <div data-role="header">
+	<div data-role="header">
 		<h1>Driver</h1>
-      </div><!-- /header -->
+	</div><!-- /header -->
 
-      <div role="main" class="ui-content">
-	
+	<div role="main" class="ui-content">
+		<div class="ui-grid-b" data-type="horizontal">
+			<div class="ui-block-a">Current weather:</div>
+		
+			<div class="ui-block-b"><button class='btn' id="weather" word-wrap="break-word">Show</button>
+			</div>
+			
+			<div class="ui-block-c"><button class='btn' id="hideForecast">Hide</button>
+			</div>
+			<script>
+			$("#hideForecast").hide();
+			</script>
+		
+		<div id="output">
+				
+		</div>
+		<script>
+		
+		$( "#weather" ).click(function() {
+		
+			$(this).text("Update");
+			$("#hideForecast").show();
+			$("#output").show();
+		
+			$.getJSON( "http://api.apixu.com/v1/current.json?key=41566e77049344ea89d212105190304&q=Dublin", function(data) {
+  
+				//console.log(data);
+				var location = data.location;
+			
+				var country = location.country;
+				var city = location.name;
+			
+				var forecast = data.current;
+						
+				var last_upd = forecast.last_updated;
+				var temp = forecast.temp_c;
+				var wind = forecast.wind_kph;
+				var humidity = forecast.humidity;
+				var cloud = forecast.cloud;
+				var vis = forecast.vis_km;
+			
+				var content = '';
+				var content2 = "";
+			
+				content = content + '<b>Location: </b>' + country + ', ' + city + "<br>";
+				
+				content2 = content2 + '<b>Last updated on: </b>' + last_upd + "<br>" + '<b>current temperature, C: </b>' + temp + "<br>" + '<b>wind, km/h: </b>' + wind + "<br>" + '<b>humidity, %: </b>' + humidity + "<br>" + '<b>cloud, %: </b>' + cloud + "<br>" + '<b>visibility, km: </b>' + vis + "<br>";
+     
+				$("#output").html(content).append(content2);
+			});
+		});
+		
+		$( "#hideForecast" ).click(function() {
+		
+			$("#output").hide();
+			$("#weather").text("Show weather");
+			$("#hideForecast").hide();
+		});
+		
+		</script>
 
 
 	</div><!-- /content -->
@@ -168,6 +226,12 @@
       
     		<label for="textarea-1">Customer comments:</label>
     	 	<textarea name="comments" id="comments"></textarea>
+
+			<div class="ui-grid-b">
+				<div class="ui-block-a"></div>
+				<div class="ui-block-b" ><label style="text-align:right;"><b>Total order price, €:</b></label></div>
+				<div class="ui-block-c"><input type="text" id="totalOrderPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px; text-align:right;" value="0"></div>
+			</div>
 
 			<div id="pizza">
 			
@@ -730,7 +794,8 @@ drink3 = new product("Sprite", "330ml", 1.00, 0);
 side1 = new product("Potato wedges", "one", 5.00, 0);
 side2 = new product("Garlic bread", "one", 5.00, 0);
 
-var pizza = [pizza1, pizza2, pizza3];
+var totalOrderPrice = 0;
+
 
 $( "#addPizza1" ).click(function() {
        if(pizza1.qty < 100) { // add a little validation
@@ -741,8 +806,8 @@ $( "#addPizza1" ).click(function() {
 
 $( "#removePizza1" ).click(function() {
 		if(pizza1.qty > 0) { // add a little validation
-           pizza1.qty = pizza1.qty - 1;
-           updateCart1();          
+          pizza1.qty = pizza1.qty - 1;
+          updateCart1();   
 		}		   
 });
 
@@ -753,6 +818,8 @@ function updateCart1(){
  			$( "#pizza1Qty" ).val(pizza1.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza1Price" ).val(pizza1.qty * pizza1.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza1.qty == 0){    
@@ -767,7 +834,9 @@ function updateCart1(){
 $( "#addPizza2" ).click(function() {
        if(pizza2.qty < 100) { // add a little validation
           pizza2.qty = pizza2.qty + 1;
-          updateCart2();  
+          updateCart2(); 
+		  totalOrderPrice +=totalOrderPrice
+		  $("#totalOrderPrice").val();
        }
 });
 
@@ -786,6 +855,8 @@ function updateCart2(){
 			$( "#pizza2Qty" ).val(pizza2.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza2Price" ).val(pizza2.qty * pizza2.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza2.qty == 0){    
@@ -819,6 +890,8 @@ function updateCart3(){
 			$( "#pizza3Qty" ).val(pizza3.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza3Price" ).val(pizza3.qty * pizza3.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza3.qty == 0){    
@@ -851,6 +924,8 @@ function updateCart4(){
 			$( "#pizza4Qty" ).val(pizza4.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza4Price" ).val(pizza4.qty * pizza4.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza4.qty == 0){    
@@ -883,6 +958,8 @@ function updateCart5(){
 			$( "#pizza5Qty" ).val(pizza5.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza5Price" ).val(pizza5.qty * pizza5.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza5.qty == 0){    
@@ -915,6 +992,8 @@ function updateCart6(){
 			$( "#pizza6Qty" ).val(pizza6.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza6Price" ).val(pizza6.qty * pizza6.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza6.qty == 0){    
@@ -946,6 +1025,8 @@ function updateCart7(){
 			$( "#pizza7Qty" ).val(pizza7.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza7Price" ).val(pizza7.qty * pizza7.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza7.qty == 0){    
@@ -963,7 +1044,7 @@ $( "#addPizza8" ).click(function() {
        }
 });
 
-$( "#removePizza6" ).click(function() {
+$( "#removePizza8" ).click(function() {
 		if(pizza8.qty > 0) { // add a little validation
            pizza8.qty = pizza8.qty - 1;
            updateCart8();          
@@ -976,6 +1057,8 @@ function updateCart8(){
 			$( "#pizza8Qty" ).val(pizza8.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza8Price" ).val(pizza8.qty * pizza8.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza8.qty == 0){    
@@ -1006,6 +1089,8 @@ function updateCart9(){
 			$( "#pizza9Qty" ).val(pizza9.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza9Price" ).val(pizza9.qty * pizza9.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza9.qty == 0){    
@@ -1036,6 +1121,8 @@ function updateCart10(){
 			$( "#pizza10Qty" ).val(pizza10.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza10Price" ).val(pizza10.qty * pizza10.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza10.qty == 0){    
@@ -1066,6 +1153,8 @@ function updateCart11(){
 			$( "#pizza11Qty" ).val(pizza11.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza11Price" ).val(pizza11.qty * pizza11.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza11.qty == 0){    
@@ -1096,6 +1185,8 @@ function updateCart12(){
 			$( "#pizza12Qty" ).val(pizza12.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza12Price" ).val(pizza12.qty * pizza12.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(pizza12.qty == 0){    
@@ -1128,6 +1219,8 @@ function updateCartSide1(){
 			$( "#side1Qty" ).val(side1.qty);
 			// update total price per pizzaz quantity
 			$( "#side1Price" ).val(side1.qty * side1.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(side1.qty == 0){    
@@ -1157,6 +1250,8 @@ function updateCartSide2(){
 			$( "#side2Qty" ).val(side2.qty);
 			// update total price per pizzaz quantity
 			$( "#side2Price" ).val(side2.qty * side2.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(side2.qty == 0){    
@@ -1187,6 +1282,8 @@ function updateCartDrink1(){
 			$( "#drink1Qty" ).val(drink1.qty);
 			// update total price per pizzaz quantity
 			$( "#drink1Price" ).val(drink1.qty * drink1.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(drink1.qty == 0){    
@@ -1216,6 +1313,8 @@ function updateCartDrink2(){
 			$( "#drink2Qty" ).val(drink2.qty);
 			// update total price per pizzaz quantity
 			$( "#drink2Price" ).val(drink2.qty * drink2.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(drink2.qty == 0){    
@@ -1246,6 +1345,8 @@ function updateCartDrink3(){
 			$( "#drink3Qty" ).val(drink3.qty);
 			// update total price per pizzaz quantity
 			$( "#drink3Price" ).val(drink3.qty * drink3.price);
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
 		if(drink3.qty == 0){    
@@ -1300,6 +1401,12 @@ $( "#placeOrder" ).click(function() {
     var pizza = $("input[name=pizza]").each(function() {
          if(this.checked == true) { // filter only the ones that we selected.
               content = content + this.value+'<br>';
+         }
+    });
+	
+	var orders = $("input[type=checkbox]").each(function() {
+         if(this.checked == true) { // filter only the ones that we selected.
+              content = content + this.value +'<br>';
          }
     });
     
@@ -1369,9 +1476,7 @@ $( "#loginButton" ).click(function() {
       var pw = $( "#login_pass" ).val();
       console.log(pw);
       
-
-      
-      
+    
       $.post( "/backend", { type: "login", username:un, password:pw})
      .done(function( data ) {
         alert( "Data Loaded: " + data );
@@ -1389,10 +1494,7 @@ $( "#loginButton" ).click(function() {
         
        });
   
-  
-  
   //alert( "register button pressed!" );
-  
   
 });
 
@@ -1428,17 +1530,6 @@ $( "#registerButton" ).click(function() {
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
