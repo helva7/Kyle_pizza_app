@@ -48,7 +48,7 @@
 		<br>
         Welcome to the application, login or register.
 
-		<h3>Show internal pages:</h3>
+		<h3>Please choose one of the following actions:</h3>
 		<p><a href="#register" class="ui-btn ui-shadow ui-corner-all">Register</a></p>
 		<p><a href="#login" class="ui-btn ui-shadow ui-corner-all">Login</a></p>
 
@@ -117,6 +117,37 @@
 
 </div>
 
+<div data-role="page" id="register" data-theme="a">
+
+       <div data-role="header">
+		<h1>Register</h1>
+      </div><!-- /header -->
+
+      <div role="main" class="ui-content">
+		<h2>Register</h2>
+        
+       Username <input type="text" name="username" id="username" value="">
+       Password <input type="text" name="pass" id="pass" value="">
+       <form>
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Account Type</legend>
+				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="customer" checked="checked">
+				
+				<label for="radio-choice-h-2a">Customer</label>  <!-- selected by default -->
+				
+				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="driver">
+				<label for="radio-choice-h-2b">Driver</label>
+				
+				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="manager">
+				<label for="radio-choice-h-2c">Manager</label>
+				</fieldset>
+		</form>
+		
+		<br>
+		<button  id="registerButton" data-theme="b">Submit</button>
+
+	</div><!-- /content -->
+</div>
 
 <div data-role="page" id="driver" data-theme="a">
 
@@ -137,9 +168,35 @@
 			$("#hideForecast").hide();
 			</script>
 		
-		<div id="output">
-				
-		</div>
+			<div id="output">	</div><!-- /weather output -->
+		</div><!-- /weather output -->
+		<div id="driverData">
+			<table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+	     		<thead>
+	       			<tr>
+						<th data-priority="1">Number</th>
+	         			<th data-priority="1">Order</th>
+	         			<th data-priority="1">Product</th>
+	         			<th data-priority="1">Quantity</th>
+	         			<th data-priority="1">Address</th>
+	         			<th data-priority="1">Delivered</th>
+	      			</tr>
+	     		</thead>
+	     		<tbody>
+	      			 <tr>
+						<th>1</th>
+	        			<th>1</th>
+	        			<td>Citizen Kane</td>
+	         			<td>1941</td>
+	         			<td>100%</td>
+	         			<td>74</td>
+	       			</tr>
+
+     			</tbody>
+   			</table>
+		</div> <!-- /driverData -->
+	
+		
 		<script>
 		
 		$( "#weather" ).click(function() {
@@ -185,22 +242,19 @@
 		
 		</script>
 
-
-	</div><!-- /content -->
-</div>
+	</div><!-- /main content -->
+</div><!-- /driver page -->
 
 
 
 <div data-role="page" id="manager" data-theme="a">
 
-       <div data-role="header">
+	<div data-role="header">
 		<h1>Manager</h1>
-      </div><!-- /header -->
+	</div><!-- /header -->
 
-      <div role="main" class="ui-content">
-	
-
-
+    <div role="main" class="ui-content">
+	 manager data
 	</div><!-- /content -->
 </div>
 
@@ -240,7 +294,7 @@
 				</div>
 				
 				<ul data-role="listview" data-inset="false" >
-					<li data-role="collapsible" data-iconpos="right" data-inset="false">
+					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName1">
 					<h2>Hawaiian</h2>
 					
 					
@@ -250,8 +304,8 @@
 							
 								<li>
 									<div class="ui-block-a">
-										<input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
-										<label for="checkbox-v-2a">Small</label> 
+										<input type="text" id="pizza1" data-enhanced="true" value="Small Hawaiian" style="width: 200px;">
+										
 									</div>
 								
 									<div class="ui-block-b">
@@ -273,8 +327,8 @@
 								
 								<li>
 									<div class="ui-block-a">
-										<input type="checkbox" name="checkbox-v-2b" id="checkbox-v-2b">
-										<label for="checkbox-v-2b">Medium</label> 
+										<input type="text" id="pizza2" data-enhanced="true" value="Medium Hawaiian" style="width: 200px;">
+										
 									</div>
 								
 									<div class="ui-block-b">
@@ -295,8 +349,8 @@
 								
 								<li>
 									<div class="ui-block-a">
-										<input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2c">
-										<label for="checkbox-v-2c">Large</label> 
+										<input type="text" id="pizza1" data-enhanced="true" value="Large Hawaiian" style="width: 200px;">
+										
 									</div>
 								
 									<div class="ui-block-b">
@@ -322,7 +376,7 @@
 						
 					</li><!-- /collapsible Hawaiian> -->
 
-					<li data-role="collapsible" data-iconpos="right" data-inset="false">
+					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName2">
 					<h2>New Yorker</h2>
 					
 					
@@ -404,7 +458,7 @@
 						
 					</li><!-- /collapsible New Yorker-->
 					
-					<li data-role="collapsible" data-iconpos="right" data-inset="false">
+					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName3">
 					<h2>House Special</h2>
 										
 						<div class="ui-grid-c"  data-role="fieldcontain">
@@ -485,7 +539,7 @@
 						
 					</li><!-- /collapsible House Special-->
 					
-					<li data-role="collapsible" data-iconpos="right" data-inset="false">
+					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName4">
 						<h2>Custom</h2>
 
 						<div class="ui-grid-c"  data-role="fieldcontain">
@@ -1421,7 +1475,7 @@ $( "#placeOrder" ).click(function() {
       .done(function( data ) {
         
         username = data.username; // whatever data comes back, store it in the username variable
-        alert(data);
+        //alert(data);
         
         content = content + "<p>Thank you for your order " + username +"!";
     
@@ -1433,36 +1487,10 @@ $( "#placeOrder" ).click(function() {
   
 </script>
 
-<div data-role="page" id="register" data-theme="a">
 
-       <div data-role="header">
-		<h1>Register</h1>
-      </div><!-- /header -->
 
-      <div role="main" class="ui-content">
-		<h2>Register</h2>
-        
-       Username <input type="text" name="username" id="username" value="">
-       Password <input type="text" name="pass" id="pass" value="">
-       <!-- Account Type <input type="text" name="acctype" id="acctype" value="" -->
-	
-			<form>
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Account Type</legend>
-					<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="customer" checked="checked">
-					<label for="radio-choice-h-2a">Customer</label>  <!-- selected by default -->
-					<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="driver">
-					<label for="radio-choice-h-2b">Driver</label>
-					<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="manager">
-					<label for="radio-choice-h-2c">Manager</label>
-				</fieldset>
-			</form>
-		
-		<br>
-		<button class="ui-btn ui-corner-all" id="registerButton">Submit</button>
 
-	</div><!-- /content -->
-</div>
+
 </body>
 
 <script>
@@ -1477,66 +1505,69 @@ $( "#loginButton" ).click(function() {
       console.log(pw);
       
     
-      $.post( "/backend", { type: "login", username:un, password:pw})
-     .done(function( data ) {
-        alert( "Data Loaded: " + data );
+		$.post( "/backend", { type: "login", username:un, password:pw}).done(function( data ) {
+			alert( "Data Loaded: " + data );
         
-        
-        if(data == 'customer'){
-            window.location="/index#customer";
-        }
-        else if(data == 'driver'){
-            window.location="/index#driver";
-        }
-		else if(data == 'manager'){
-            window.location="/index#manager";
-        }
-        
-       });
+			if(data == 'customer'){
+				window.location="/index#customer";
+			}
+			else if(data == 'driver'){
+				window.location="/index#driver";
+			}
+			else if(data == 'manager'){
+				window.location="/index#manager";
+			}
+		});
   
-  //alert( "register button pressed!" );
+	//alert( "login button pressed!" );
   
-});
+	});
 
 
 $( "#registerButton" ).click(function() {
   
       var un = $( "#username" ).val();
-      console.log(un);
+      //console.log(un);
       
       var pw = $( "#pass" ).val();
-      console.log(pw);
+      //console.log(pw);
       
-     // didn't copy this function from anywhere, just my logical conclusion, somehow looks correct
-	 	  var accountType = "";
+	  // didn't copy this function from anywhere, just my logical conclusion
+	  var accountType = "";
 	  $("input[name=radio-choice-h-2]").each(function() {
-		  if (this.checked == true){
-			  accountType += this.value; 
+			if (this.checked == true){
+				accountType += this.value; 
 			}
-      });	 
-      console.log(accountType);  
+	  });	 
+		console.log(accountType);  
+		
+		// validation
+		if(un == ""){
+			alert("please enter a username");
+		} 
+		else if (pw == ""){
+			alert("please enter a password");
+		} else {
       
-      $.post( "/backend", { type: "register", username:un, password:pw, acctype:accountType})
-     .done(function( data ) {
-        alert( "Data Loaded: " + data );
-       });
-  
-  
-  
-  //alert( "register button pressed!" );
-  
-  
-});
+			$.post( "/backend", { type: "register", username:un, password:pw, acctype:accountType}).done(function( data ) {
+				//alert( data );
+				if(accountType == 'customer'){
+					window.location="/index#customer";
+				}
+				else if(accountType == 'driver'){
+					window.location="/index#driver";
+				}
+				else if(accountType == 'manager'){
+					window.location="/index#manager";
+				}
+			});
+		}
+   
+		//alert( "register button pressed!" );
+	});
 
 
 </script>
-
-
-
-
-
-
-
 
 
 
