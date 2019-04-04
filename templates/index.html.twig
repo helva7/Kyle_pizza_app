@@ -605,7 +605,7 @@
 													
 								<li>
 									<div class="ui-grid-solo">
-										<div class="ui-block-a">Extra toppings:</div>
+										<div class="ui-block-a">Extra toppings:(***select first***)</div>
 									</div>
 
 									<div class="ui-grid-c">
@@ -806,38 +806,39 @@
 // template for a product
 
 class product {
-  constructor(name, size, price, qty) {
+  constructor(name, price, qty) {
     this.name = name;
-	this.size = size;
     this.price = price;
     this.qty = qty;
   }
 }
 
 // define our products
-pizza1 = new product("Hawaiian", "small", 5.00, 0);
-pizza2 = new product("Hawaiian", "medium", 10.00, 0);
-pizza3 = new product("Hawaiian", "large", 11.00, 0);
+pizza1 = new product("Hawaiian small", 5.00, 0);
+pizza2 = new product("Hawaiian medium", 10.00, 0);
+pizza3 = new product("Hawaiian large", 11.00, 0);
 
-pizza4 = new product("New Yorker", "small", 5.00, 0);
-pizza5 = new product("New Yorker", "medium", 10.00, 0);
-pizza6 = new product("New Yorker", "large", 11.00, 0);
+pizza4 = new product("New Yorker small", 5.00, 0);
+pizza5 = new product("New Yorker medium", 10.00, 0);
+pizza6 = new product("New Yorker large", 11.00, 0);
 
-pizza7 = new product("House Special", "small", 5.00, 0);
-pizza8 = new product("House Special", "medium", 10.00, 0);
-pizza9 = new product("House Special", "large", 11.00, 0);
+pizza7 = new product("House Special small", 5.00, 0);
+pizza8 = new product("House Special medium", 10.00, 0);
+pizza9 = new product("House Special large", 11.00, 0);
 
-pizza10 = new product("Custom", "small", 5.00, 0);
-pizza11 = new product("Custom", "medium", 10.00, 0);
-pizza12 = new product("Custom", "large", 11.00, 0);
+pizza10 = new product("Custom small", 5.00, 0);
+pizza11 = new product("Custom medium", 10.00, 0);
+pizza12 = new product("Custom large", 11.00, 0);
 
 
-drink1 = new product("Coca cola", "330ml", 1.00, 0);
-drink2 = new product("Fanta", "330ml", 1.00, 0);
-drink3 = new product("Sprite", "330ml", 1.00, 0);
+drink1 = new product("Coca cola 330ml", 1.00, 0);
+drink2 = new product("Fanta 330ml", 1.00, 0);
+drink3 = new product("Sprite 330ml", 1.00, 0);
 
-side1 = new product("Potato wedges", "one", 5.00, 0);
-side2 = new product("Garlic bread", "one", 5.00, 0);
+side1 = new product("Potato wedges", 5.00, 0);
+side2 = new product("Garlic bread", 5.00, 0);
+
+topping = new product("Extra topping", 1.00, 0);
 
 var totalOrderPrice = 0;
 
@@ -1162,11 +1163,20 @@ $( "#removePizza10" ).click(function() {
 
 // function to update the cart.
 function updateCart10(){
+
+	var count = 0;
+	$("[id^=checkbox-v-2t]").each(function() {
+		if(this.checked == true) { 
+			count += 1;
+		}
+	});
+			
 		if (pizza10.qty >= 0) {
+
 			$( "#pizza10Qty" ).val(pizza10.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza10Price" ).val(pizza10.qty * pizza10.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price + topping.price * count;
 		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
@@ -1194,11 +1204,19 @@ $( "#removePizza11" ).click(function() {
 
 // function to update the cart.
 function updateCart11(){
+
+	var count = 0;
+	$("[id^=checkbox-v-2t]").each(function() {
+		if(this.checked == true) { 
+			count += 1;
+		}
+	});
+
 		if (pizza11.qty >= 0) { 
 			$( "#pizza11Qty" ).val(pizza11.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza11Price" ).val(pizza11.qty * pizza11.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price + topping.price * count;
 		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
@@ -1226,11 +1244,19 @@ $( "#removePizza12" ).click(function() {
 
 // function to update the cart.
 function updateCart12(){
+
+	var count = 0;
+	$("[id^=checkbox-v-2t]").each(function() {
+		if($(this).checked == true) { 
+			count += 1;
+		}
+	});
+
 		if (pizza12.qty >= 0) { 
 			$( "#pizza12Qty" ).val(pizza12.qty);
 			// update total price per pizzaz quantity
 			$( "#pizza12Price" ).val(pizza12.qty * pizza12.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
+			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price + topping.price * count;
 		  $("#totalOrderPrice").val(totalOrderPrice);
 		}
          
