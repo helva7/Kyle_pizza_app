@@ -126,8 +126,8 @@
       <div role="main" class="ui-content">
 		<h2>Register</h2>
         
-       Username <input type="text" name="username" id="username" value="">
-       Password <input type="text" name="pass" id="pass" value="">
+       Username <input type="text" name="register_username" id="register_username" value="">
+       Password <input type="text" name="register_pass" id="register_pass" value="">
        <form>
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<legend>Account Type</legend>
@@ -206,6 +206,8 @@
 			$("#output").show();
 		
 			$.getJSON( "http://api.apixu.com/v1/current.json?key=41566e77049344ea89d212105190304&q=Dublin", function(data) {
+			
+				console.log(data);
   
 				//console.log(data);
 				var location = data.location;
@@ -271,519 +273,21 @@
 		<div id="orderOptions">
 
 
-    		<label>
-       			<input type="radio" name="pizza" value = "bbq" id="radio-choice-0a">BBQ
-    		</label>
-
-    		<label for="radio-choice-0b">Sausage pizza</label>
-    		<input type="radio" name="pizza" id="radio-choice-0b" value = "sausage" class="custom">
-      
-    		<label for="textarea-1">Customer comments:</label>
-    	 	<textarea name="comments" id="comments"></textarea>
 
 			<div class="ui-grid-b">
-				<div class="ui-block-a"></div>
+				<div class="ui-block-a">Pizzas, Sides and drinks</div>
 				<div class="ui-block-b" ><label style="text-align:right;"><b>Total order price, €:</b></label></div>
 				<div class="ui-block-c"><input type="text" id="totalOrderPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px; text-align:right;" value="0"></div>
 			</div>
 
-			<div id="pizza">
-			
-				<div class="ui-grid-solo">
-					<div class="ui-block-a">Pizza</div>
-				</div>
-				
-				<ul data-role="listview" data-inset="false" >
-					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName1">
-					<h2>Hawaiian</h2>
-					
-					
-						<div class="ui-grid-c"  data-role="fieldcontain">
-						
-							<ul data-role="listview" data-theme="a">
-							
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product1" data-enhanced="true" value="Small Hawaiian" style="width: 200px;">
-										
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza1" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza1Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza1" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, 
-									€: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza1Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value="0"></div>	
-								</li>
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product2" data-enhanced="true" value="Medium Hawaiian" style="width: 200px;">
-										
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza2" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza2Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza2" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza2Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0"></div>
-								</li>
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product3" data-enhanced="true" value="Large Hawaiian" style="width: 200px;">
-										
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza3" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza3Qty" data-enhanced="true" value="0" style="width: 35px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza3" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza3Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0"></div>	
-								</li>
-						
 
-							</ul>
+			<div id="pruductsOptions">	
 						
-						</div><!-- /grid-c -->
-						
-					</li><!-- /collapsible Hawaiian> -->
+			</div><!-- /products options -->		
 
-					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName2">
-					<h2>New Yorker</h2>
-					
-					
-						<div class="ui-grid-c"  data-role="fieldcontain">
-						
-							<ul data-role="listview" data-theme="a">
-							
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product4" data-enhanced="true" value="Small New Yorker" style="width: 200px;">
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza4" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza4Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza4" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza4Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
-								</li>
-								
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product5" data-enhanced="true" value="Medium New Yorker" style="width: 200px;"> 
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza5" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza5Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza5" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza5Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
-								</li>
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product6" data-enhanced="true" value="Large New Yorker" style="width: 200px;">
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza6" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza6Qty" data-enhanced="true" value="0" style="width: 35px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza6" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza6Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
-								</li>
-						
-
-							</ul>
-						
-						</div><!-- /grid-c -->
-						
-					</li><!-- /collapsible New Yorker-->
-					
-					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName3">
-					<h2>House Special</h2>
-										
-						<div class="ui-grid-c"  data-role="fieldcontain">
-						
-							<ul data-role="listview" data-theme="a">
-							
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product7" data-enhanced="true" value="Small House Special" style="width: 200px;"> 
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza7" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza7Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza7" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza7Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
-								</li>
-								
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product8" data-enhanced="true" value="Medium House Special" style="width: 200px;"> 
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza8" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza8Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza8" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza8Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
-								</li>
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product9" data-enhanced="true" value="Large House Special" style="width: 200px;">  
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza9" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza9Qty" data-enhanced="true" value="0" style="width: 35px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza9" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza9Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
-								</li>
-						
-
-							</ul>
-						
-						</div><!-- /grid-c -->
-						
-					</li><!-- /collapsible House Special-->
-					
-					<li data-role="collapsible" data-iconpos="right" data-inset="false" id="productName4">
-						<h2>Custom</h2>
-
-						<div class="ui-grid-c"  data-role="fieldcontain">
-						
-							<ul data-role="listview" data-theme="a">
-							
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product10" data-enhanced="true" value="Small Custom" style="width: 200px;"> 
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza10" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza10Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza10" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza10Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
-								</li>
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product11" data-enhanced="true" value="Medium Custom" style="width: 200px;"> 
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza11" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza11Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza11" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza11Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
-								</li>
-								
-								<li>
-									<div class="ui-block-a">
-										<input type="text" id="product12" data-enhanced="true" value="Large Custom" style="width: 200px;"> 
-									</div>
-								
-									<div class="ui-block-b">
-										<div class="ui-grid-b" data-type="horizontal">
-											<div class="ui-block-a"><input type="button" id="addPizza12" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-											
-											<div class="ui-block-b"><input type="text" id="pizza12Qty" data-enhanced="true" value="0" style="width: 35px;"></div>
-											
-											<div class="ui-block-c"><input type="button" id="removePizza12" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-											
-										</div>							
-									</div>
-									
-									<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-									
-									<div class="ui-block-d"><input type="text" id="pizza12Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>	
-								</li>
-													
-								<li>
-									<div class="ui-grid-solo">
-										<div class="ui-block-a">Extra toppings:(***select first***)</div>
-									</div>
-
-									<div class="ui-grid-c">
-										<div class="ui-block-a">
-											<label for="checkbox-v-2t1">ham</label>
-											<input type="checkbox" name="checkbox-v-2t1" id="checkbox-v-2t1" data-mini="true">
-										</div>
-										<div class="ui-block-b">
-											<label for="checkbox-v-2t2">chicken</label>
-											<input type="checkbox" name="checkbox-v-2t2" id="checkbox-v-2t2" data-mini="true">
-										</div>
-										<div class="ui-block-c">
-											<label for="checkbox-v-2t3">pepperoni</label>
-											<input type="checkbox" name="checkbox-v-2t3" id="checkbox-v-2t3" data-mini="true">
-										</div>									
-									
-										<div class="ui-block-a">
-											<label for="checkbox-v-2t4">sweetcorn</label>
-											<input type="checkbox" name="checkbox-v-2t4" id="checkbox-v-2t4" data-mini="true">
-										</div>
-										<div class="ui-block-b">
-											<label for="checkbox-v-2t5">tomato</label>
-											<input type="checkbox" name="checkbox-v-2t5" id="checkbox-v-2t5" data-mini="true">
-										</div>
-										<div class="ui-block-c">
-											<label for="checkbox-v-2t6">peppers</label>
-											<input type="checkbox" name="checkbox-v-2t6" id="checkbox-v-2t6" data-mini="true">
-										</div>	
-								</li>
-														
-							</ul>
-						</div><!-- /class="ui-grid-c"  data-role="fieldcontain"-->
-					</li><!-- /collapsible custom-->
-				</ul><!-- /ul pizzas list-->
-			</div><!-- /pizzas -->  
-			
-			<div id="sides">
-				<div class="ui-grid-solo">
-					<div class="ui-block-a">Sides and drinks</div>
-				</div>
-					
-				<ul data-role="listview" data-inset="false" >
-						<li data-role="collapsible" data-iconpos="right" data-inset="false">
-							<h2>Sides</h2>
-							
-								<div class="ui-grid-c"  data-role="fieldcontain">
-								
-									<ul data-role="listview" data-theme="a">
-									
-										<li>
-											<div class="ui-block-a">
-												<input type="text" id="product13" data-enhanced="true" value="Potato wedges" style="width: 200px;"> 
-												 
-											</div>
-										
-											<div class="ui-block-b">
-												<div class="ui-grid-b" data-type="horizontal">
-													<div class="ui-block-a"><input type="button" id="addSide1" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-													
-													<div class="ui-block-b"><input type="text" id="side1Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-													
-													<div class="ui-block-c"><input type="button" id="removeSide1" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-													
-												</div>							
-											</div>
-											
-											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-											
-											<div class="ui-block-d"><input type="text" id="side1Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
-										</li>
-										
-										
-										<li>
-											<div class="ui-block-a">
-												<input type="text" id="product14" data-enhanced="true" value="Garlic bread" style="width: 200px;"> 
-												
-											</div>
-										
-											<div class="ui-block-b">
-												<div class="ui-grid-b" data-type="horizontal">
-													<div class="ui-block-a"><input type="button" id="addSide2" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-													
-													<div class="ui-block-b"><input type="text" id="side2Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-													
-													<div class="ui-block-c"><input type="button" id="removeSide2" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-													
-												</div>							
-											</div>
-											
-											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-											
-											<div class="ui-block-d"><input type="text" id="side2Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
-										</li>						
-									</ul>
-								</div><!-- /grid-c -->
-						</li><!-- /collapsible sides-->
-						
-						<li data-role="collapsible" data-iconpos="right" data-inset="false">
-							<h2>Drinks</h2>
-							
-								<div class="ui-grid-c"  data-role="fieldcontain">
-								
-									<ul data-role="listview" data-theme="a">
-									
-										<li>
-											<div class="ui-block-a">
-												<input type="text" id="product15" data-enhanced="true" value="Coca cola 330ml" style="width: 200px;"> 
-												 
-											</div>
-										
-											<div class="ui-block-b">
-												<div class="ui-grid-b" data-type="horizontal">
-													<div class="ui-block-a"><input type="button" id="addDrink1" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-													
-													<div class="ui-block-b"><input type="text" id="drink1Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-													
-													<div class="ui-block-c"><input type="button" id="removeDrink1" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-													
-												</div>							
-											</div>
-											
-											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-											
-											<div class="ui-block-d"><input type="text" id="drink1Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;" value=""></div>	
-										</li>
-										
-										
-										<li>
-											<div class="ui-block-a">
-												<input type="text" id="product16" data-enhanced="true" value="Fanta 330 ml" style="width: 200px;"> 
-												
-											</div>
-										
-											<div class="ui-block-b">
-												<div class="ui-grid-b" data-type="horizontal">
-													<div class="ui-block-a"><input type="button" id="addDrink2" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-													
-													<div class="ui-block-b"><input type="text" id="drink2Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-													
-													<div class="ui-block-c"><input type="button" id="removeDrink2" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-													
-												</div>							
-											</div>
-											
-											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-											
-											<div class="ui-block-d"><input type="text" id="drink2Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
-										</li>	
-
-										<li>
-											<div class="ui-block-a">
-												<input type="text" id="product17" data-enhanced="true" value="Sprite 330ml" style="width: 200px;"> 
-												
-											</div>
-										
-											<div class="ui-block-b">
-												<div class="ui-grid-b" data-type="horizontal">
-													<div class="ui-block-a"><input type="button" id="addDrink3" data-inline="true" data-mini="true" data-theme="b" value="+"></div> 
-													
-													<div class="ui-block-b"><input type="text" id="drink3Qty" data-enhanced="true" value="0" style="width: 40px;"></div>
-													
-													<div class="ui-block-c"><input type="button" id="removeDrink3" data-inline="true" data-mini="true" data-theme="b" value="-"></div>
-													
-												</div>							
-											</div>
-											
-											<div class="ui-block-c"><label style="text-align:right;">total, €: </label></div>
-											
-											<div class="ui-block-d"><input type="text" id="drink3Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value=""></div>
-										</li>	
-										
-									</ul>
-								</div><!-- /grid-c -->
-						</li><!-- /collapsible drinks-->
-						
-				</ul><!-- /ul -->
-
-			</div>
+			      
+    		<label for="textarea-1">Customer comments:</label>
+    	 	<textarea name="comments" id="comments"></textarea>
      
 			<button id="placeOrder" data-theme="b">Place order </button>
       
@@ -814,618 +318,168 @@ class product {
 }
 
 // define our products
-pizza1 = new product("Hawaiian small", 5.00, 0);
-pizza2 = new product("Hawaiian medium", 10.00, 0);
-pizza3 = new product("Hawaiian large", 11.00, 0);
+product1 = new product("Hawaiian small", 5.00, 0);
+product2 = new product("Hawaiian medium", 10.00, 0);
+product3 = new product("Hawaiian large", 11.00, 0);
 
-pizza4 = new product("New Yorker small", 5.00, 0);
-pizza5 = new product("New Yorker medium", 10.00, 0);
-pizza6 = new product("New Yorker large", 11.00, 0);
+product4 = new product("New Yorker small", 5.00, 0);
+product5 = new product("New Yorker medium", 10.00, 0);
+product6 = new product("New Yorker large", 11.00, 0);
 
-pizza7 = new product("House Special small", 5.00, 0);
-pizza8 = new product("House Special medium", 10.00, 0);
-pizza9 = new product("House Special large", 11.00, 0);
+product7 = new product("House Special small", 5.00, 0);
+product8 = new product("House Special medium", 10.00, 0);
+product9 = new product("House Special large", 11.00, 0);
 
-pizza10 = new product("Custom small", 5.00, 0);
-pizza11 = new product("Custom medium", 10.00, 0);
-pizza12 = new product("Custom large", 11.00, 0);
+product10 = new product("Custom small", 5.00, 0);
+product11 = new product("Custom medium", 10.00, 0);
+product12 = new product("Custom large", 11.00, 0);
 
 
-drink1 = new product("Coca cola 330ml", 1.00, 0);
-drink2 = new product("Fanta 330ml", 1.00, 0);
-drink3 = new product("Sprite 330ml", 1.00, 0);
+product13 = new product("Coca cola 330ml", 1.00, 0);
+product14 = new product("Fanta 330ml", 1.00, 0);
+product15 = new product("Sprite 330ml", 1.00, 0);
 
-side1 = new product("Potato wedges", 5.00, 0);
-side2 = new product("Garlic bread", 5.00, 0);
+product16 = new product("Extra topping ham", 1.00, 0);
+product17 = new product("Extra topping chicken", 1.00, 0);
+product18 = new product("Extra topping pepperoni", 1.00, 0);
+product19 = new product("Extra topping sweetcorn", 1.00, 0);
+product20 = new product("Extra topping peppers", 1.00, 0);
+product21 = new product("Extra topping tomato", 1.00, 0);
 
-topping = new product("Extra topping", 1.00, 0);
+product22 = new product("Potato wedges", 5.00, 0);
+product23 = new product("Garlic bread", 5.00, 0);
+
+
+var products = [];
+
+products.push(product1);
+products.push(product2);
+products.push(product3);
+products.push(product4);
+products.push(product5);
+products.push(product6);
+products.push(product7);
+products.push(product8);
+products.push(product9);
+products.push(product10);
+products.push(product11);
+products.push(product12);
+products.push(product13);
+products.push(product14);
+products.push(product15);
+products.push(product16);
+products.push(product17);
+products.push(product18);
+products.push(product19);
+products.push(product20);
+products.push(product21);
+products.push(product22);
+products.push(product23);
+
+console.log(products);
+
 
 var totalOrderPrice = 0;
 
+function makeProducts(){
 
-$( "#addPizza1" ).click(function() {
-       if(pizza1.qty < 100) { // add a little validation
-          pizza1.qty = pizza1.qty + 1;
-          updateCart1();  
-       }
-});
+	var arrayLength = products.length;
+	
+	for (var i = 0; i < arrayLength; i++) { // loop over the products
 
-$( "#removePizza1" ).click(function() {
-		if(pizza1.qty > 0) { // add a little validation
-          pizza1.qty = pizza1.qty - 1;
-          updateCart1();   
-		}		   
-});
+		var html = 
+		'<input type="text" id="product'+(i+1)+'" data-enhanced="true" value="'+ products[i].name +'" style="width: 200px;">'+
 
-// function to update the cart.
-function updateCart1(){
-		if (pizza1.qty >= 0) { // check to see if we should add it or not
-			//price = pizza.qty * pizza.price;
- 			$( "#pizza1Qty" ).val(pizza1.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza1Price" ).val(pizza1.qty * pizza1.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza1.qty == 0){    
-			$( "#pizza1Price" ).hide();
-		} else {
-			$( "#pizza1Price" ).show();
-		}
-}
+		'<input type="button" id="addProduct'+(i+1)+'" data-inline="true" data-mini="true" data-theme="b" value="+" productname="'+ products[i].name + '" >'+
+													
+		'<input type="text" id="'+ i +'Qty" data-enhanced="true" value="0" style="width: 40px;">'+
+													
+		'<input type="button" id="removeProduct'+(i+1)+'" data-inline="true" data-mini="true" data-theme="b" value="-" productname="' + products[i].name + '" >'+
 
-
-
-$( "#addPizza2" ).click(function() {
-       if(pizza2.qty < 100) { // add a little validation
-          pizza2.qty = pizza2.qty + 1;
-          updateCart2(); 
-		  totalOrderPrice +=totalOrderPrice
-		  $("#totalOrderPrice").val();
-       }
-});
-
-$( "#removePizza2" ).click(function() {
-		if(pizza2.qty > 0) { // add a little validation
-           pizza2.qty = pizza1.qty - 1;
-           updateCart2();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart2(){
-		if (pizza2.qty >= 0) { // check to see if we should add it or not
-			//price = pizza.qty * pizza.price;
-          
-			$( "#pizza2Qty" ).val(pizza2.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza2Price" ).val(pizza2.qty * pizza2.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza2.qty == 0){    
-			$( "#pizza2Price" ).hide();
-		} else {
-			$( "#pizza2Price" ).show();
-		}
-}
-
-
-
-$( "#addPizza3" ).click(function() {
-       if(pizza3.qty < 100) { // add a little validation
-          pizza3.qty = pizza3.qty + 1;
-          updateCart3();  
-       }
-});
-
-$( "#removePizza3" ).click(function() {
-		if(pizza3.qty > 0) { // add a little validation
-           pizza3.qty = pizza3.qty - 1;
-           updateCart3();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart3(){
-		if (pizza3.qty >= 0) { // check to see if we should add it or not
-			//price = pizza.qty * pizza.price;
-
-			$( "#pizza3Qty" ).val(pizza3.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza3Price" ).val(pizza3.qty * pizza3.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza3.qty == 0){    
-			$( "#pizza3Price" ).hide();
-		} else {
-			$( "#pizza3Price" ).show();
-		}
-}
-
-
-$( "#addPizza4" ).click(function() {
-       if(pizza4.qty < 100) { // add a little validation
-          pizza4.qty = pizza4.qty + 1;
-          updateCart4();  
-       }
-});
-
-$( "#removePizza4" ).click(function() {
-		if(pizza4.qty > 0) { // add a little validation
-           pizza4.qty = pizza4.qty - 1;
-           updateCart4();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart4(){
-		if (pizza4.qty >= 0) { // check to see if we should add it or not
-			//price = pizza.qty * pizza.price;
-
-			$( "#pizza4Qty" ).val(pizza4.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza4Price" ).val(pizza4.qty * pizza4.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza4.qty == 0){    
-			$( "#pizza4Price" ).hide();
-		} else {
-			$( "#pizza4Price" ).show();
-		}
-}
-
-
-$( "#addPizza5" ).click(function() {
-       if(pizza5.qty < 100) { // add a little validation
-          pizza5.qty = pizza5.qty + 1;
-          updateCart5();  
-       }
-});
-
-$( "#removePizza5" ).click(function() {
-		if(pizza5.qty > 0) { // add a little validation
-           pizza5.qty = pizza5.qty - 1;
-           updateCart5();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart5(){
-		if (pizza5.qty >= 0) { // check to see if we should add it or not
-			//price = pizza.qty * pizza.price;
-
-			$( "#pizza5Qty" ).val(pizza5.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza5Price" ).val(pizza5.qty * pizza5.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza5.qty == 0){    
-			$( "#pizza5Price" ).hide();
-		} else {
-			$( "#pizza5Price" ).show();
-		}
-}
-
-
-$( "#addPizza6" ).click(function() {
-       if(pizza6.qty < 100) { // add a little validation
-          pizza6.qty = pizza6.qty + 1;
-          updateCart6();  
-       }
-});
-
-$( "#removePizza6" ).click(function() {
-		if(pizza6.qty > 0) { // add a little validation
-           pizza6.qty = pizza6.qty - 1;
-           updateCart6();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart6(){
-		if (pizza6.qty >= 0) { // check to see if we should add it or not
-			//price = pizza.qty * pizza.price;
-
-			$( "#pizza6Qty" ).val(pizza6.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza6Price" ).val(pizza6.qty * pizza6.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza6.qty == 0){    
-			$( "#pizza6Price" ).hide();
-		} else {
-			$( "#pizza6Price" ).show();
-		}
-}
-
-
-
-$( "#addPizza7" ).click(function() {
-       if(pizza7.qty < 100) { // add a little validation
-          pizza7.qty = pizza7.qty + 1;
-          updateCart7();  
-       }
-});
-
-$( "#removePizza7" ).click(function() {
-		if(pizza7.qty > 0) { // add a little validation
-           pizza7.qty = pizza7.qty - 1;
-           updateCart7();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart7(){
-		if (pizza7.qty >= 0) { 
-			$( "#pizza7Qty" ).val(pizza7.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza7Price" ).val(pizza7.qty * pizza7.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza7.qty == 0){    
-			$( "#pizza7Price" ).hide();
-		} else {
-			$( "#pizza7Price" ).show();
-		}
-}
-
-
-$( "#addPizza8" ).click(function() {
-       if(pizza8.qty < 100) { // add a little validation
-          pizza8.qty = pizza8.qty + 1;
-          updateCart8();  
-       }
-});
-
-$( "#removePizza8" ).click(function() {
-		if(pizza8.qty > 0) { // add a little validation
-           pizza8.qty = pizza8.qty - 1;
-           updateCart8();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart8(){
-		if (pizza8.qty >= 0) { 
-			$( "#pizza8Qty" ).val(pizza8.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza8Price" ).val(pizza8.qty * pizza8.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza8.qty == 0){    
-			$( "#pizza8Price" ).hide();
-		} else {
-			$( "#pizza8Price" ).show();
-		}
-}
-
-
-$( "#addPizza9" ).click(function() {
-       if(pizza9.qty < 100) { // add a little validation
-          pizza9.qty = pizza9.qty + 1;
-          updateCart9();  
-       }
-});
-
-$( "#removePizza9" ).click(function() {
-		if(pizza9.qty > 0) { // add a little validation
-           pizza9.qty = pizza9.qty - 1;
-           updateCart9();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart9(){
-		if (pizza9.qty >= 0) { 
-			$( "#pizza9Qty" ).val(pizza9.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza9Price" ).val(pizza9.qty * pizza9.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza9.qty == 0){    
-			$( "#pizza9Price" ).hide();
-		} else {
-			$( "#pizza9Price" ).show();
-		}
+		'total, €:'+
+											
+		'<input type="text" id="'+i+'Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0">'+
+													
+		'<p>';
+		
+		$( "#pruductsOptions" ).append(html);
+		
 	}
+}
+
+makeProducts();
 
 
-$( "#addPizza10" ).click(function() {
-       if(pizza10.qty < 100) { // add a little validation
-          pizza10.qty = pizza10.qty + 1;
-          updateCart10();  
-       }
-});
 
-$( "#removePizza10" ).click(function() {
-		if(pizza10.qty > 0) { // add a little validation
-           pizza10.qty = pizza10.qty - 1;
-           updateCart10();          
-		}		   
-});
 
-// function to update the cart.
-function updateCart10(){
+$('[id^=addProduct]' ).click(function() {
+		
+		var arrayLength = products.length;
 
-	var count = 0;
-	$("[id^=checkbox-v-2t]").each(function() {
-		if(this.checked == true) { 
-			count += 1;
-		}
-	});
+		var p = $(this).attr('productname'); // find out what was clicked
+		
+		for (var i = 0; i < arrayLength; i++) { // loop over the products
+		
+			var pro = products[i];
 			
-		if (pizza10.qty >= 0) {
+			if(p == pro.name) {
 
-			$( "#pizza10Qty" ).val(pizza10.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza10Price" ).val(pizza10.qty * pizza10.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price + topping.price * count;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza10.qty == 0){    
-			$( "#pizza10Price" ).hide();
-		} else {
-			$( "#pizza10Price" ).show();
-		}
-}
-
-
-$( "#addPizza11" ).click(function() {
-       if(pizza11.qty < 100) { // add a little validation
-          pizza11.qty = pizza11.qty + 1;
-          updateCart11();  
-       }
-});
-
-$( "#removePizza11" ).click(function() {
-		if(pizza11.qty > 0) { // add a little validation
-           pizza11.qty = pizza11.qty - 1;
-           updateCart11();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart11(){
-
-	var count = 0;
-	$("[id^=checkbox-v-2t]").each(function() {
-		if(this.checked == true) { 
-			count += 1;
+				pro.qty = pro.qty + 1;
+				
+				//product1Qty
+				$( "#"+i+"Qty" ).val(pro.qty);
+				
+				$( "#"+i+"Price" ).val(pro.qty * pro.price);
+				
+				updateCart();
+			}
 		}
 	});
 
-		if (pizza11.qty >= 0) { 
-			$( "#pizza11Qty" ).val(pizza11.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza11Price" ).val(pizza11.qty * pizza11.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price + topping.price * count;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza11.qty == 0){    
-			$( "#pizza11Price" ).hide();
-		} else {
-			$( "#pizza11Price" ).show();
-		}
-}
+$('[id^=removeProduct]' ).click(function() {
+		
+		var arrayLength = products.length;
 
+		var p = $(this).attr('productname'); // find out what was clicked
+		
+		for (var i = 0; i < arrayLength; i++) { // loop over the products
+		
+			var pro = products[i];
+			
+			if(p == pro.name) {
+			
+				if (pro.qty > 0) {
 
-$( "#addPizza12" ).click(function() {
-       if(pizza12.qty < 100) { // add a little validation
-          pizza12.qty = pizza12.qty + 1;
-          updateCart12();  
-       }
-});
+					pro.qty = pro.qty - 1;
+					
+					//product1Qty
+					$( "#"+i+"Qty" ).val(pro.qty);
+					
+					$( "#"+i+"Price" ).val(pro.qty * pro.price);
 
-$( "#removePizza12" ).click(function() {
-		if(pizza12.qty > 0) { // add a little validation
-           pizza12.qty = pizza12.qty - 1;
-           updateCart12();          
-		}		   
-});
-
-// function to update the cart.
-function updateCart12(){
-
-	var count = 0;
-	$("[id^=checkbox-v-2t]").each(function() {
-		if($(this).checked == true) { 
-			count += 1;
+					updateCart();  
+				}
+			}
 		}
 	});
 
-		if (pizza12.qty >= 0) { 
-			$( "#pizza12Qty" ).val(pizza12.qty);
-			// update total price per pizzaz quantity
-			$( "#pizza12Price" ).val(pizza12.qty * pizza12.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price + topping.price * count;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(pizza12.qty == 0){    
-			$( "#pizza12Price" ).hide();
-		} else {
-			$( "#pizza12Price" ).show();
-		}
-}
-
-
-
-
-$( "#addSide1" ).click(function() {
-       if(side1.qty < 100) { // add a little validation
-          side1.qty = side1.qty + 1;
-          updateCartSide1();  
-       }
-});
-
-$( "#removeSide1" ).click(function() {
-		if(side1.qty > 0) { // add a little validation
-           side1.qty = side1.qty - 1;
-           updateCartSide1();          
-		}		   
-});
-
 // function to update the cart.
-function updateCartSide1(){
-		if (side1.qty >= 0) { 
-			$( "#side1Qty" ).val(side1.qty);
-			// update total price per pizzaz quantity
-			$( "#side1Price" ).val(side1.qty * side1.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(side1.qty == 0){    
-			$( "#side1Price" ).hide();
-		} else {
-			$( "#side1Price" ).show();
-		}
+function updateCart(){
+	
+	var totalOrderPrice = 0;
+
+	var arrayLength = products.length;
+
+	for (var i = 0; i < arrayLength; i++) { // loop over the products
+		
+		totalOrderPrice += products[i].qty * products[i].price;
+				
+	}		
+	
+	$("#totalOrderPrice").val(totalOrderPrice);
+	
 }
 
-$( "#addSide2" ).click(function() {
-       if(side2.qty < 100) { // add a little validation
-          side2.qty = side2.qty + 1;
-          updateCartSide2();  
-       }
-});
-
-$( "#removeSide2" ).click(function() {
-		if(side2.qty > 0) { // add a little validation
-           side2.qty = side2.qty - 1;
-           updateCartSide2();          
-		}		   
-});
-
-// function to update the cart.
-function updateCartSide2(){
-		if (side2.qty >= 0) { 
-			$( "#side2Qty" ).val(side2.qty);
-			// update total price per pizzaz quantity
-			$( "#side2Price" ).val(side2.qty * side2.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(side2.qty == 0){    
-			$( "#side2Price" ).hide();
-		} else {
-			$( "#side2Price" ).show();
-		}
-}
-
-
-$( "#addDrink1" ).click(function() {
-       if(drink1.qty < 100) { // add a little validation
-          drink1.qty = drink1.qty + 1;
-          updateCartDrink1();  
-       }
-});
-
-$( "#removeDrink1" ).click(function() {
-		if(drink1.qty > 0) { // add a little validation
-           drink1.qty = drink1.qty - 1;
-           updateCartDrink1();          
-		}		   
-});
-
-// function to update the cart.
-function updateCartDrink1(){
-		if (drink1.qty >= 0) { 
-			$( "#drink1Qty" ).val(drink1.qty);
-			// update total price per pizzaz quantity
-			$( "#drink1Price" ).val(drink1.qty * drink1.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(drink1.qty == 0){    
-			$( "#drink1Price" ).hide();
-		} else {
-			$( "#drink1Price" ).show();
-		}
-}
-
-$( "#addDrink2" ).click(function() {
-       if(drink2.qty < 100) { // add a little validation
-          drink2.qty = drink2.qty + 1;
-          updateCartDrink2();  
-       }
-});
-
-$( "#removeDrink2" ).click(function() {
-		if(drink2.qty > 0) { // add a little validation
-           drink2.qty = drink2.qty - 1;
-           updateCartDrink2();          
-		}		   
-});
-
-// function to update the cart.
-function updateCartDrink2(){
-		if (drink2.qty >= 0) { 
-			$( "#drink2Qty" ).val(drink2.qty);
-			// update total price per pizzaz quantity
-			$( "#drink2Price" ).val(drink2.qty * drink2.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(drink2.qty == 0){    
-			$( "#drink2Price" ).hide();
-		} else {
-			$( "#drink2Price" ).show();
-		}
-}
-
-
-$( "#addDrink3" ).click(function() {
-       if(drink3.qty < 100) { // add a little validation
-          drink3.qty = drink3.qty + 1;
-          updateCartDrink3();  
-       }
-});
-
-$( "#removeDrink3" ).click(function() {
-		if(drink3.qty > 0) { // add a little validation
-           drink3.qty = drink3.qty - 1;
-           updateCartDrink3();          
-		}		   
-});
-
-// function to update the cart.
-function updateCartDrink3(){
-		if (drink3.qty >= 0) { 
-			$( "#drink3Qty" ).val(drink3.qty);
-			// update total price per pizzaz quantity
-			$( "#drink3Price" ).val(drink3.qty * drink3.price);
-			totalOrderPrice = pizza1.qty * pizza1.price + pizza2.qty * pizza2.price + pizza3.qty * pizza3.price + pizza4.qty * pizza4.price + pizza5.qty * pizza5.price + pizza6.qty * pizza6.price + pizza7.qty * pizza7.price + pizza8.qty * pizza8.price + pizza9.qty * pizza9.price +pizza10.qty * pizza10.price + pizza11.qty * pizza11.price + pizza12.qty * pizza12.price   +   drink1.qty * drink1.price + drink2.qty * drink2.price + drink3.qty * drink3.price  +   side1.qty * side1.price + side2.qty * side2.price;
-		  $("#totalOrderPrice").val(totalOrderPrice);
-		}
-         
-		if(drink3.qty == 0){    
-			$( "#drink3Price" ).hide();
-		} else {
-			$( "#drink3Price" ).show();
-		}
-}
 </script>
 
 
@@ -1441,8 +495,11 @@ $("#completeOrder").click(function(){
      alert(order);
      
      // put a jquery post here to the database. using the /backend
-
-
+	 
+	$.post( "/backend", { type: "order", username:un, password:pw}).done(function( data ) {
+		alert( "Your order has been placed! " + data );
+        
+	});
 });
 
 
@@ -1464,10 +521,20 @@ $( "#placeOrder" ).click(function() {
 	$("#orderDetails").show(); // show order details
 	$("#goback").show(); // show go back button
 	$("#completeOrder").show(); // hide go complete order button
-
-    var content = '';// build up the content
+	
+	
+	
+	var content = '';// build up the content
+	
+	
+	$("[id*=pizza_]").each(function() {
+		console.log($(this));
+		console.log($(this).quantity());
+		
+	});	
  
-    content = content + '<b> Pizza type: </b>';
+    content = content + '<b> Pizza type: </b><br><br>';
+	
     
     var pizza = $("input[name=pizza]").each(function() {
          if(this.checked == true) { // filter only the ones that we selected.
@@ -1475,15 +542,31 @@ $( "#placeOrder" ).click(function() {
          }
     });
 	
-	var orders = $("input[type=checkbox]").each(function() {
-         if(this.checked == true) { // filter only the ones that we selected.
-              content = content + this.value +'<br>';
-         }
-    });
+	var arrayLength = products.length;
+	
+	for (var i = 0; i < arrayLength; i++) { // loop over the products
+		
+		var order = '';
+		
+		if (products[i].qty > 0) {
+		
+			order += '***' + products[i].name + '  ' +  products[i].qty + ' --- total, €  ' +  products[i].qty*products[i].price +'<br>';
+			
+			content = content + order + '<br>';
+			
+			//totalOrderPrice += products[i].qty * products[i].price;
+		}
+	}
+	
+	var totalOrderPrice = $("#totalOrderPrice").val();
+	
+	content = content + ' Total order price, €  :'+ totalOrderPrice + '<br>';
+	
     
     var comments = $("#comments").val(); // get the comments
     
-    content = content + '<b>Additional order comments: </b></br>';
+    content = content + '<br><b>Additional order comments: </b><br>';
+	
     content = content + comments + '<br>';
     
     var username = '';
@@ -1491,8 +574,112 @@ $( "#placeOrder" ).click(function() {
     $.post( "/backend", { type: "getusername"} )
       .done(function( data ) {
         
-        username = data.username; // whatever data comes back, store it in the username variable
-        //alert(data);
+        username = data; // whatever data comes back, store it in the username variable
+        alert(data);
+        
+        content = content + "<p>Thank you for your order " + username +"!";
+    
+        // the updateing of the div, is INSIDE the .done function above, as we need to wait to get it back!
+        $("#orderDetails").html(content); 
+       
+    });
+});
+
+
+
+$( "#completeOrder" ).click(function() {
+
+	
+    $("#orderOptions").hide(); // hide the order options
+	$("#orderDetails").show(); // show order details
+	$("#goback").show(); // show go back button
+	$("#completeOrder").show(); // hide go complete order button
+	
+	
+	var ser = '';
+
+    var arrayLength = prod.length;
+     
+    for (var i = 0; i < arrayLength; i++) { // loop over the products
+            
+        var pro = prod[i] // get one product at a time
+        console.log(pro.name);
+        console.log(pro.qty);
+            
+        er = ser + pro.name + '-' + pro.qty + '='; 
+    }
+
+    var placedby = '';
+    
+    $.post( "/backend", { type: "getusername"} )
+      .done(function( data ) {
+        
+        placedby = data; // whatever data comes back, store it in the username variable
+        alert(data);
+       
+    });
+     
+     
+    // jQuery post and send the ser.
+
+    $.post( "/catchTheCart", { placedby: "John", ser: ser })
+      .done(function( data ) {
+        alert( "Data Loaded: " + data );
+      });
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	var content = '';// build up the content
+	
+   
+    var pizza = $("input[name=pizza]").each(function() {
+         if(this.checked == true) { // filter only the ones that we selected.
+              content = content + this.value+'<br>';
+         }
+    });
+	
+	var arrayLength = products.length;
+	
+	for (var i = 0; i < arrayLength; i++) { // loop over the products
+		
+		var order = '';
+		
+		if (products[i].qty > 0) {
+		
+			order += '***' + products[i].name + '  ' +  products[i].qty + ' --- total, €  ' +  products[i].qty*products[i].price +'<br>';
+			
+			content = content + order + '<br>';
+			
+			//totalOrderPrice += products[i].qty * products[i].price;
+		}
+	}
+	
+	var totalOrderPrice = $("#totalOrderPrice").val();
+	
+	content = content + ' Total order price, €  :'+ totalOrderPrice + '<br>';
+	
+    
+    var comments = $("#comments").val(); // get the comments
+    
+    content = content + '<br><b>Additional order comments: </b><br>';
+	
+    content = content + comments + '<br>';
+    
+    var username = '';
+    
+    $.post( "/backend", { type: "getusername"} )
+      .done(function( data ) {
+        
+        username = data; // whatever data comes back, store it in the username variable
+        alert(data);
         
         content = content + "<p>Thank you for your order " + username +"!";
     
@@ -1519,7 +706,7 @@ $( "#loginButton" ).click(function() {
       console.log(un);
       
       var pw = $( "#login_pass" ).val();
-      console.log(pw);
+      //console.log(pw);
       
     
 		$.post( "/backend", { type: "login", username:un, password:pw}).done(function( data ) {
@@ -1534,6 +721,7 @@ $( "#loginButton" ).click(function() {
 			else if(data == 'manager'){
 				window.location="/index#manager";
 			}
+
 		});
   
 	//alert( "login button pressed!" );
@@ -1543,10 +731,10 @@ $( "#loginButton" ).click(function() {
 
 $( "#registerButton" ).click(function() {
   
-      var un = $( "#username" ).val();
+      var un = $( "#register_username" ).val();
       //console.log(un);
       
-      var pw = $( "#pass" ).val();
+      var pw = $( "#register_pass" ).val();
       //console.log(pw);
       
 	  // didn't copy this function from anywhere, just my logical conclusion
@@ -1556,7 +744,7 @@ $( "#registerButton" ).click(function() {
 				accountType += this.value; 
 			}
 	  });	 
-		console.log(accountType);  
+		//console.log(accountType);  
 		
 		// validation
 		if(un == ""){
@@ -1564,18 +752,39 @@ $( "#registerButton" ).click(function() {
 		} 
 		else if (pw == ""){
 			alert("please enter a password");
+			
 		} else {
+		
+			
       
 			$.post( "/backend", { type: "register", username:un, password:pw, acctype:accountType}).done(function( data ) {
-				//alert( data );
-				if(accountType == 'customer'){
-					window.location="/index#customer";
-				}
-				else if(accountType == 'driver'){
-					window.location="/index#driver";
-				}
-				else if(accountType == 'manager'){
-					window.location="/index#manager";
+			
+				//console.log( data );
+				
+				if(data == 'exists'){
+				
+					alert('USERNAME EXISIT');
+				
+					window.location="/index#register";
+					
+					//$("#register_username").val('Username exists');
+					//$("#register_username").html('username exists');
+					
+					$("#register_username").css('color', 'red');
+					
+				} else {
+				
+				
+					if(accountType == 'customer'){
+						window.location="/index#customer";
+					}
+					else if(accountType == 'driver'){
+						window.location="/index#driver";
+					}
+					else if(accountType == 'manager'){
+						window.location="/index#manager";
+					}
+				
 				}
 			});
 		}

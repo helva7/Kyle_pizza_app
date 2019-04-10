@@ -27,6 +27,7 @@ class Backend extends AbstractController
     /**
      * @Route("/backend", name="catch") methods={"GET","POST"}
      */
+	 
     public function index(SessionInterface $session)
     {
         $request = Request::createFromGlobals(); // the envelope, and were looking inside it.
@@ -34,33 +35,46 @@ class Backend extends AbstractController
         $type = $request->request->get('type', 'none'); // to send ourself in different directions
         
         if($type == 'register'){
-            // perform register process
-            
-            // get the variables
+			
+			// get the username and password
             $username = $request->request->get('username', 'none');
-            $password = $request->request->get('password', 'none');
-            $acctype = $request->request->get('acctype', 'none');
-			$satus = 0;
-                        
-            // put in the database            
-             $entityManager = $this->getDoctrine()->getManager();
-
-              $login = new Login();
-              $login->setUsername($username);
-              $login->setPassword($password);
-              $login->setAcctype($acctype);
-			  $login->setStatus($satus);
-
-
-             $entityManager->persist($login);
-
-             // actually executes the queries (i.e. the INSERT query)
-             $entityManager->flush();             
-                        
-             return new Response(
-                     'register page was called!'
-                    );
             
+            $repo = $this->getDoctrine()->getRepository(Login::class);
+
+            $person = $repo->findOneBy([ 'username' => $username ]);
+			
+			if ($person) {
+				return new Response(
+					'exists'
+				);
+				
+			}
+			else {
+			
+				// perform register process
+				
+				// get the variables
+				$username = $request->request->get('username', 'none');
+				$password = $request->request->get('password', 'none');
+				$acctype = $request->request->get('acctype', 'none');
+							
+				// put in the database            
+				$entityManager = $this->getDoctrine()->getManager();
+
+				$login = new Login();
+				$login->setUsername($username);
+				$login->setPassword($password);
+				$login->setAcctype($acctype);
+				 
+				$entityManager->persist($login);
+
+				// actually executes the queries (i.e. the INSERT query)
+				$entityManager->flush();             
+							
+				return new Response(
+					'register page was called!'
+				);
+			}
         }
         else if($type == 'login'){ // if we had a login
             
@@ -78,34 +92,24 @@ class Backend extends AbstractController
                 'username' => $username,
                 'password' => $password,
                 ]);
-                
-                
-                
+
                 // save the user ID to the session
                 // KEY-VALUE
                 
                 // KEY - IS the name we give it
                 // $variable - is what we want to save.
                $session->set('username', $username);
-                
-                
                
                 return new Response(
                     $person->getAcctype()
                     );               
 
-             
-             
-             
-            
         }
         else if($type == 'getusername'){
             // send back a response, with the username we stored in the session.
-            //return new Response("username is " . $session->get('username'));
-			return new Response($session->get('username'));
+            return new Response( $session->get('username'));
+        
         }
-        
-        
          
                 return new Response(
                     'all ok'

@@ -25,15 +25,15 @@ class Orders
     /**
      * @ORM\Column(type="integer")
      */
-    private $userID;
+    private $userName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $productID;
+    private $productName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $quantity;
 
@@ -59,26 +59,26 @@ class Orders
         return $this;
     }
 
-    public function getUserID(): ?int
+    public function getUserName(): ?string
     {
-        return $this->userID;
+        return $this->userName;
     }
 
-    public function setUserID(int $userID): self
+    public function setUserName(int $userName): self
     {
-        $this->userID = $userID;
+        $this->userName = $userName;
 
         return $this;
     }
 
-    public function getProductID(): ?int
+    public function getProductName(): ?string
     {
-        return $this->productID;
+        return $this->productName;
     }
 
-    public function setProductID(int $productID): self
+    public function setProductName(string $productName): self
     {
-        $this->productID = $productID;
+        $this->productName = $productName;
 
         return $this;
     }
