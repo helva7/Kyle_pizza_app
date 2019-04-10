@@ -13,7 +13,6 @@ class Orders
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-
      */
     private $id;
 
@@ -21,21 +20,26 @@ class Orders
      * @ORM\Column(type="datetime")
      */
     private $date;
+	
+	public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $placedby;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ordered;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $userName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $productName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $quantity;
+    private $total;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -59,38 +63,38 @@ class Orders
         return $this;
     }
 
-    public function getUserName(): ?string
+    public function getPlacedby(): ?string
     {
-        return $this->userName;
+        return $this->placedby;
     }
 
-    public function setUserName(int $userName): self
+    public function setPlacedby(string $placedby): self
     {
-        $this->userName = $userName;
+        $this->placedby = $placedby;
 
         return $this;
     }
 
-    public function getProductName(): ?string
+    public function getOrdered(): ?string
     {
-        return $this->productName;
+        return $this->ordered;
     }
 
-    public function setProductName(string $productName): self
+    public function setOrdered(string $ordered): self
     {
-        $this->productName = $productName;
+        $this->ordered = $ordered;
 
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getTotal(): ?int
     {
-        return $this->quantity;
+        return $this->total;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setTotal(int $total): self
     {
-        $this->quantity = $quantity;
+        $this->total = $total;
 
         return $this;
     }

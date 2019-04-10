@@ -286,8 +286,8 @@
 			</div><!-- /products options -->		
 
 			      
-    		<label for="textarea-1">Customer comments:</label>
-    	 	<textarea name="comments" id="comments"></textarea>
+    		<!--<label for="textarea-1">Customer comments:</label>
+    	 	<textarea name="comments" id="comments"></textarea>-->
      
 			<button id="placeOrder" data-theme="b">Place order </button>
       
@@ -488,19 +488,7 @@ $("#goback").hide(); // hide go back button
 $("#completeOrder").hide(); // hide go complete order button
 $("#orderDetails").hide(); // hide order details
 
-$("#completeOrder").click(function(){
 
-     var order = $("#orderDetails").html();
-
-     alert(order);
-     
-     // put a jquery post here to the database. using the /backend
-	 
-	$.post( "/backend", { type: "order", username:un, password:pw}).done(function( data ) {
-		alert( "Your order has been placed! " + data );
-        
-	});
-});
 
 
 $("#goback").click(function(){
@@ -563,11 +551,11 @@ $( "#placeOrder" ).click(function() {
 	content = content + ' Total order price, €  :'+ totalOrderPrice + '<br>';
 	
     
-    var comments = $("#comments").val(); // get the comments
+    //var comments = $("#comments").val(); // get the comments
     
-    content = content + '<br><b>Additional order comments: </b><br>';
+    //content = content + '<br><b>Additional order comments: </b><br>';
 	
-    content = content + comments + '<br>';
+    //content = content + comments + '<br>';
     
     var username = '';
     
@@ -575,7 +563,7 @@ $( "#placeOrder" ).click(function() {
       .done(function( data ) {
         
         username = data; // whatever data comes back, store it in the username variable
-        alert(data);
+        //alert(data);
         
         content = content + "<p>Thank you for your order " + username +"!";
     
@@ -594,20 +582,6 @@ $( "#completeOrder" ).click(function() {
 	$("#orderDetails").show(); // show order details
 	$("#goback").show(); // show go back button
 	$("#completeOrder").show(); // hide go complete order button
-	
-	
-	var ser = '';
-
-    var arrayLength = prod.length;
-     
-    for (var i = 0; i < arrayLength; i++) { // loop over the products
-            
-        var pro = prod[i] // get one product at a time
-        console.log(pro.name);
-        console.log(pro.qty);
-            
-        er = ser + pro.name + '-' + pro.qty + '='; 
-    }
 
     var placedby = '';
     
@@ -615,78 +589,55 @@ $( "#completeOrder" ).click(function() {
       .done(function( data ) {
         
         placedby = data; // whatever data comes back, store it in the username variable
-        alert(data);
+		
+        console.log(placedby);
+		
+		
+				var serial = '';
+		//var orderPrice = '';
+		var status = 'pending';
+
+		var arrayLength = products.length;
+		
+		for (var i = 0; i < arrayLength; i++) { // loop over the products
+			
+			if (products[i].qty > 0) {
+			
+				serial += products[i].name + '-' +  products[i].qty + '=';
+				
+				//orderPrice += products[i].qty * products[i].price;
+			}
+		}
+		console.log(serial);
+		
+		var orderPrice = 0;
+		for (var i = 0; i < arrayLength; i++) { // loop over the products
+			
+			orderPrice += products[i].qty * products[i].price;
+					
+		}	
+		
+		console.log(orderPrice);
+		
+		
+		// jQuery post and send the ser.
+
+		$.post( "/catchTheCart", { placedby: placedby, ser: serial, orderPrice:orderPrice, status: status })
+		  .done(function( data ) {
+			alert( "Data Loaded: " + data );
+		});
+		
        
     });
-     
-     
-    // jQuery post and send the ser.
-
-    $.post( "/catchTheCart", { placedby: "John", ser: ser })
-      .done(function( data ) {
-        alert( "Data Loaded: " + data );
-      });
-	
-	
-	
+    
 	
 
 	
 	
-	
-	
-	
-	
-	var content = '';// build up the content
 	
    
-    var pizza = $("input[name=pizza]").each(function() {
-         if(this.checked == true) { // filter only the ones that we selected.
-              content = content + this.value+'<br>';
-         }
-    });
-	
-	var arrayLength = products.length;
-	
-	for (var i = 0; i < arrayLength; i++) { // loop over the products
-		
-		var order = '';
-		
-		if (products[i].qty > 0) {
-		
-			order += '***' + products[i].name + '  ' +  products[i].qty + ' --- total, €  ' +  products[i].qty*products[i].price +'<br>';
-			
-			content = content + order + '<br>';
-			
-			//totalOrderPrice += products[i].qty * products[i].price;
-		}
-	}
-	
-	var totalOrderPrice = $("#totalOrderPrice").val();
-	
-	content = content + ' Total order price, €  :'+ totalOrderPrice + '<br>';
-	
-    
-    var comments = $("#comments").val(); // get the comments
-    
-    content = content + '<br><b>Additional order comments: </b><br>';
-	
-    content = content + comments + '<br>';
-    
-    var username = '';
-    
-    $.post( "/backend", { type: "getusername"} )
-      .done(function( data ) {
-        
-        username = data; // whatever data comes back, store it in the username variable
-        alert(data);
-        
-        content = content + "<p>Thank you for your order " + username +"!";
-    
-        // the updateing of the div, is INSIDE the .done function above, as we need to wait to get it back!
-        $("#orderDetails").html(content); 
-       
-    });
+
+
 });
   
 </script>
@@ -710,7 +661,7 @@ $( "#loginButton" ).click(function() {
       
     
 		$.post( "/backend", { type: "login", username:un, password:pw}).done(function( data ) {
-			alert( "Data Loaded: " + data );
+			//alert( "Data Loaded: " + data );
         
 			if(data == 'customer'){
 				window.location="/index#customer";

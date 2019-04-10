@@ -15,18 +15,17 @@ class CatchTheCart extends AbstractController
      */
     public function index()
     {
-        $request = Request::createFromGlobals(); // the envelope, and were looking inside it.
+		$request = Request::createFromGlobals(); // the envelope, and were looking inside it.
 
-
-        
         // catch the variables we sent from the JavaScript.
         $placedby = $request->request->get('placedby', 'this is the default');
+		
         $ser = $request->request->get('ser', 'this is the default');
+		
+		$orderPrice = $request->request->get('orderPrice', 'this is the default');
         
-      
-      
-      
-      
+		$status = $request->request->get('status', 'this is the default');
+		
       // Break apart the serialized order
       // $data = explode('=', 'cookies-2=pizza-2='); <--- this is what order details look like
         /*
@@ -36,8 +35,6 @@ class CatchTheCart extends AbstractController
             $item = explode('-',$record);
             echo 'Item: ' . $item[0] . '<br>';
             echo 'Qty: ' . $item[1] . '<br>';
-            
-            
             
         }
         */
@@ -50,7 +47,12 @@ class CatchTheCart extends AbstractController
         $order = new Orders();
         
         $order->setPlacedBy($placedby);
-        $order->setDetails(substr($ser, 0, -1));
+		
+        $order->setOrdered(substr($ser, 0, -1));
+		
+		$order->setTotal($orderPrice);
+		
+		$order->setStatus($status);
 
 
       
