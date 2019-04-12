@@ -22,9 +22,9 @@ class Orders
     private $date;
 	
 	public function __construct()
-    {
-        $this->date = new \DateTime();
-    }
+             {
+                 $this->date = new \DateTime();
+             }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,12 +39,17 @@ class Orders
     /**
      * @ORM\Column(type="integer")
      */
-    private $total;
+    private $orderPrice;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
 
     public function getId(): ?int
     {
@@ -87,14 +92,14 @@ class Orders
         return $this;
     }
 
-    public function getTotal(): ?int
+    public function getOrderPrice(): ?int
     {
-        return $this->total;
+        return $this->orderPrice;
     }
 
-    public function setTotal(int $total): self
+    public function setOrderPrice(int $orderPrice): self
     {
-        $this->total = $total;
+        $this->orderPrice = $orderPrice;
 
         return $this;
     }
@@ -107,6 +112,18 @@ class Orders
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

@@ -20,14 +20,16 @@ class CatchTheCart extends AbstractController
         // catch the variables we sent from the JavaScript.
         $placedby = $request->request->get('placedby', 'this is the default');
 		
+		$address = $request->request->get('address', 'this is the default');
+		
         $ser = $request->request->get('ser', 'this is the default');
 		
-		$orderPrice = $request->request->get('orderPrice', 'this is the default');
+		$orderPrice = $request->request->get('orderPrice', '0');
         
 		$status = $request->request->get('status', 'this is the default');
 		
       // Break apart the serialized order
-      // $data = explode('=', 'cookies-2=pizza-2='); <--- this is what order details look like
+      // $data = explode('; ', 'cookies-2; pizza-2; '); <--- this is what order details look like
         /*
         foreach($data as $record) {    
            
@@ -48,9 +50,11 @@ class CatchTheCart extends AbstractController
         
         $order->setPlacedBy($placedby);
 		
+		$order->setAddress($address);
+		
         $order->setOrdered(substr($ser, 0, -1));
 		
-		$order->setTotal($orderPrice);
+		$order->setOrderPrice($orderPrice);
 		
 		$order->setStatus($status);
 
@@ -66,7 +70,7 @@ class CatchTheCart extends AbstractController
 
        
         return new Response(
-            'all ok' . $ser
+            'all ok ' . $ser
         );
 
      

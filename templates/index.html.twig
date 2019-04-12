@@ -25,6 +25,11 @@
     padding-bottom:.22em;
 	}
 	</style>
+	
+	<style>
+    .ui-content { margin: 0.5em auto; max-width: 1000px; width: 90%; font: 18px/1.5 sans-serif; }
+    .ui-content { background: #f2f2f2; padding: 3px 5px; }
+</style>
 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -170,32 +175,76 @@
 		
 			<div id="output">	</div><!-- /weather output -->
 		</div><!-- /weather output -->
+		<p><br><b> Current orders: </b></p>
 		<div id="driverData">
-			<table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
-	     		<thead>
-	       			<tr>
-						<th data-priority="1">Number</th>
-	         			<th data-priority="1">Order</th>
-	         			<th data-priority="1">Product</th>
-	         			<th data-priority="1">Quantity</th>
-	         			<th data-priority="1">Address</th>
-	         			<th data-priority="1">Delivered</th>
-	      			</tr>
-	     		</thead>
-	     		<tbody>
-	      			 <tr>
-						<th>1</th>
-	        			<th>1</th>
-	        			<td>Citizen Kane</td>
-	         			<td>1941</td>
-	         			<td>100%</td>
-	         			<td>74</td>
-	       			</tr>
 
-     			</tbody>
-   			</table>
+			<script>
+			
+			$.post( "/displayDriver" )
+				.done(function( data ) {
+				
+				//console.log(data);
+				
+				$("#driverData").html(data);
+				
+			});     
+			
+			</script>
+
 		</div> <!-- /driverData -->
-	
+		
+		
+		<div class="ui-grid-b" data-type="horizontal">
+			
+			<div class="ui-block-a"><button class='btn' id="updateDriverOrders"> Update orders list </button></div>
+					
+				<script>
+					
+					$( "#updateDriverOrders" ).click(function() {
+						$.post( "/displayDriver" )
+							.done(function( data ) {
+							
+							//console.log(data);
+							
+							$("#driverData").html(data);
+							
+						});   
+					});			
+					
+				</script>
+					
+			
+			<div class="ui-block-b"><button class='btn' id="markDelivered"> Mark as delivered </button></div>
+					
+				<script>
+				
+				$( "#markDelivered" ).click(function() {
+				
+					var orderId = "";
+					
+					$("input[type='radio'][name='delivered']").each(function(){
+					
+						if (this.checked == true){
+							orderId += this.value; 
+						}
+						
+						console.log(orderId);
+						
+						$.post( "/delivered", { id: orderId} )
+							.done(function(data) {
+									
+							$("#driverData").html(data);
+						});
+						
+					}); 
+				});
+				
+				</script>
+					
+			
+			<div class="ui-block-b"></div>
+			
+		</div> <!-- /class="ui-grid-b" data-type="horizontal" -->
 		
 		<script>
 		
@@ -258,7 +307,8 @@
     <div role="main" class="ui-content">
 	 manager data
 	</div><!-- /content -->
-</div>
+	
+</div><!-- /manager page -->
 
 
 
@@ -267,15 +317,72 @@
     <div data-role="header">
 			<h1>Customer page</h1>
     </div><!-- /header -->
+	
+	
+	<div class="ui-grid-b">
+		
+		<div class="ui-block-a"><button class='btn' id="placeAnotherOrder"> Place another order </button></div>
+			
+		<div class="ui-block-b" ><button class='btn' id="hideCustomerOrders"> Hide my orders </button></div>
+			
+		<div class="ui-block-c" ><button class='btn' id="updateCustomerOrders"> Check my orders </button></div>
+				
+	</div>
+	
+	
+	<div class="ui-grid-b id="customerDataHeader">
+		<div class="ui-block-a"></div>
+		<div id="customerDataHeader" class="ui-block-b"><h3> My orders: </h3></div>
+		<div class="ui-block-c"></div>
+	</div>
+	
+	<div id="customerData">
+	
+		<script>
+		$("#placeOrder").hide();
+		$("#hideCustomerOrders").hide();
+		$("#customerDataHeader").hide();
+		$("#customerData").hide();
+		
+		$( "#updateCustomerOrders" ).click(function() {
+		
+			$("#customerDataHeader").show();
+			$("#customerData").show();
+			$("#hideCustomerOrders").show();
+			$("#updateCustomerOrders").hide();
+		
+			var placedby = '';
+			
+			$.post( "/displayCustomer" )
+				.done(function( data ) {
+				
+				//console.log(data);
+				
+				$("#customerData").html(data);
+				
+			});     
+		});	
+		
+		$( "#hideCustomerOrders" ).click(function() {
+		
+			$("#updateCustomerOrders").show();
+			$("#customerDataHeader").hide();
+			$("#customerData").hide();
+			$("#hideCustomerOrders").hide();
+		    
+		});	
+		
+		</script>
+
+	</div> <!-- /customerData -->
+	
 
     <div role="main" class="ui-content">
-
+	
 		<div id="orderOptions">
 
-
-
 			<div class="ui-grid-b">
-				<div class="ui-block-a">Pizzas, Sides and drinks</div>
+				<div class="ui-block-a"><h2>Pizzas, Sides and drinks</h2></div>
 				<div class="ui-block-b" ><label style="text-align:right;"><b>Total order price, €:</b></label></div>
 				<div class="ui-block-c"><input type="text" id="totalOrderPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px; text-align:right;" value="0"></div>
 			</div>
@@ -293,18 +400,38 @@
       
 			
 		</div><!-- /order options -->
+		
+		
+		
+		<div id="complete">
+    
+			<h3> Your order details:</h3>
+			
+				<div id="orderDetails">
+		
+				</div>
+		
+				<div id="address">
+		
+					<h3>Please enter delivery address:</h3>
+
+	    			<input type="text" name="deliveryAddress" id="deliveryAddress" value="" placeholder="Enter your delivery address"></input>
+	
+				</div>
+		
+		</div><!-- /complete -->
+		
+		<button id="goback">Go back to order  </button>
+		
+		<button id="completeOrder">Complete order </button>
+		
+		
+		
 	</div><!-- /content -->
+	
+
     
-    <div id="orderDetails">
-    <h3> Your order details:</h3><br>
-        
-    </div>
-    
-	<button id="goback">Go back to order  </button>
-    
-    <button id="completeOrder">Complete order </button>
-    
-</div>
+
 
 <script>
 // template for a product
@@ -484,28 +611,30 @@ function updateCart(){
 
 
 <script>
+$("#placeAnotherOrder").hide(); // hide order details
 $("#goback").hide(); // hide go back button
 $("#completeOrder").hide(); // hide go complete order button
-$("#orderDetails").hide(); // hide order details
+$("#complete").hide(); // hide go complete order button
 
 
 
 
 $("#goback").click(function(){
-
-     $("#orderOptions").show();
-    
+	  
+	 $("#pruductsOptions").show();
      $("#orderDetails").html(""); // wipe the older order display
-	 
+	 //$("#orderDetails").hide(); // hide order details
 	 $("#goback").hide(); // hide go back button
 	 $("#completeOrder").hide(); // hide go complete order button
+	 $("#complete").hide(); // hide go complete order button
+
 });
 
 
 $( "#placeOrder" ).click(function() {
 
-	
-    $("#orderOptions").hide(); // hide the order options
+	$("#complete").show();
+    $("#pruductsOptions").hide(); // hide the order options
 	$("#orderDetails").show(); // show order details
 	$("#goback").show(); // show go back button
 	$("#completeOrder").show(); // hide go complete order button
@@ -513,13 +642,6 @@ $( "#placeOrder" ).click(function() {
 	
 	
 	var content = '';// build up the content
-	
-	
-	$("[id*=pizza_]").each(function() {
-		console.log($(this));
-		console.log($(this).quantity());
-		
-	});	
  
     content = content + '<b> Pizza type: </b><br><br>';
 	
@@ -538,7 +660,7 @@ $( "#placeOrder" ).click(function() {
 		
 		if (products[i].qty > 0) {
 		
-			order += '***' + products[i].name + '  ' +  products[i].qty + ' --- total, €  ' +  products[i].qty*products[i].price +'<br>';
+			order += '***' + products[i].name + '  @  ' +  products[i].qty + ' --- total, €  ' +  products[i].qty*products[i].price +'<br>';
 			
 			content = content + order + '<br>';
 			
@@ -578,7 +700,7 @@ $( "#placeOrder" ).click(function() {
 $( "#completeOrder" ).click(function() {
 
 	
-    $("#orderOptions").hide(); // hide the order options
+    $("#productsOptions").hide(); // hide the order options
 	$("#orderDetails").show(); // show order details
 	$("#goback").show(); // show go back button
 	$("#completeOrder").show(); // hide go complete order button
@@ -590,11 +712,11 @@ $( "#completeOrder" ).click(function() {
         
         placedby = data; // whatever data comes back, store it in the username variable
 		
-        console.log(placedby);
+        //console.log(placedby);
 		
 		
-				var serial = '';
-		//var orderPrice = '';
+		var serial = '';
+		
 		var status = 'pending';
 
 		var arrayLength = products.length;
@@ -603,7 +725,7 @@ $( "#completeOrder" ).click(function() {
 			
 			if (products[i].qty > 0) {
 			
-				serial += products[i].name + '-' +  products[i].qty + '=';
+				serial += products[i].name + '-' +  products[i].qty + '; ';
 				
 				//orderPrice += products[i].qty * products[i].price;
 			}
@@ -614,30 +736,32 @@ $( "#completeOrder" ).click(function() {
 		for (var i = 0; i < arrayLength; i++) { // loop over the products
 			
 			orderPrice += products[i].qty * products[i].price;
-					
+		
 		}	
 		
 		console.log(orderPrice);
 		
+		var address = $("#deliveryAddress").val();
+		console.log(address);
+		
 		
 		// jQuery post and send the ser.
 
-		$.post( "/catchTheCart", { placedby: placedby, ser: serial, orderPrice:orderPrice, status: status })
+		$.post( "/catchTheCart", { placedby: placedby, address: address, ser: serial, orderPrice:orderPrice, status: status })
 		  .done(function( data ) {
-			alert( "Data Loaded: " + data );
+			//alert( "Data Loaded: " + data );
 		});
 		
+		
+		$("#placeAnotherOrder").show();
+		$("#updateCustomerOrders").show();
+		
+		window.location="/index";
+
        
     });
     
 	
-
-	
-	
-	
-   
-
-
 });
   
 </script>
@@ -646,7 +770,7 @@ $( "#completeOrder" ).click(function() {
 
 
 
-</body>
+
 
 <script>
 
@@ -695,7 +819,7 @@ $( "#registerButton" ).click(function() {
 				accountType += this.value; 
 			}
 	  });	 
-		//console.log(accountType);  
+		console.log(accountType);  
 		
 		// validation
 		if(un == ""){
@@ -746,6 +870,7 @@ $( "#registerButton" ).click(function() {
 
 </script>
 
+</body>
 
 
 </html>
