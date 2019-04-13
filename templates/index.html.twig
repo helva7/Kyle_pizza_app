@@ -132,7 +132,9 @@
 		<h2>Register</h2>
         
        Username <input type="text" name="register_username" id="register_username" value="">
+	   
        Password <input type="text" name="register_pass" id="register_pass" value="">
+	   
        <form>
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<legend>Account Type</legend>
@@ -157,10 +159,13 @@
 <div data-role="page" id="driver" data-theme="a">
 
 	<div data-role="header">
+	
 		<h1>Driver</h1>
+		
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
+	
 		<div class="ui-grid-b" data-type="horizontal">
 			<div class="ui-block-a">Current weather:</div>
 		
@@ -174,13 +179,17 @@
 			</script>
 		
 			<div id="output">	</div><!-- /weather output -->
+			
 		</div><!-- /weather output -->
+		
 		<p><br><b> Current orders: </b></p>
+		
 		<div id="driverData">
 
 			<script>
 			
 			$.post( "/displayDriver" )
+			
 				.done(function( data ) {
 				
 				//console.log(data);
@@ -201,7 +210,9 @@
 				<script>
 					
 					$( "#updateDriverOrders" ).click(function() {
+					
 						$.post( "/displayDriver" )
+						
 							.done(function( data ) {
 							
 							//console.log(data);
@@ -237,6 +248,9 @@
 						});
 						
 					}); 
+					
+					alert("Order " + orderId + " has been marked as delivered");
+					
 				});
 				
 				</script>
@@ -305,7 +319,113 @@
 	</div><!-- /header -->
 
     <div role="main" class="ui-content">
-	 manager data
+	
+		<div id=managerReport> </div>
+		
+		<div class="ui-grid-b" data-type="horizontal">
+			
+			<div class="ui-block-a"><button class='btn' id="report"> Update report </button></div>
+					
+				<script>
+					//updating the manager view at loading
+					$.post( "/total" )
+						.done(function( data ) {
+						
+						//console.log(data);
+						
+						$("#managerReport").html(data);
+						
+					}); 
+					//assigning on click action to a button
+					$( "#report" ).click(function() {
+						$.post( "/total " )
+							.done(function( data ) {
+							
+							//console.log(data);
+							
+							$("#managerReport").html(data);
+							
+						});   
+					});			
+					
+				</script>
+					
+			
+			<div class="ui-block-b"></div>
+				
+		</div> <!-- /class="ui-grid-b" data-type="horizontal" -->
+
+		
+		<div id=cancellOrder> 
+		
+			<script>
+			
+			$.post( "/displayManager" )
+				.done(function( data ) {
+				
+				//console.log(data);
+				
+				$("#cancellOrder").html(data);
+				
+			});     
+			
+			</script>
+		
+		</div>
+		
+		<div class="ui-grid-b" data-type="horizontal">
+		
+			<div class="ui-block-a"><button class='btn' id="updateManagerOrders"> Update orders </button></div>
+			
+			<script>
+					
+					
+				$( "#updateManagerOrders" ).click(function() {
+					$.post( "/displayManager" )
+						.done(function( data ) {
+							
+						//console.log(data);
+							
+						$("#cancellOrder").html(data);
+					
+					});   
+				});			
+					
+			</script>
+				
+			
+			<div class="ui-block-b"><button class='btn' id="deleteOrder"> Cancell order </button></div>
+					
+				<script>
+				
+				$( "#deleteOrder" ).click(function() {
+				
+					var orderIdManager = "";
+					
+					$("input[type='radio'][name='cancellOrderManager']").each(function(){
+					
+						if (this.checked == true){
+							orderIdManager += this.value; 
+						}
+						
+						console.log(orderIdManager);
+						
+						$.post( "/delete", { id: orderIdManager} )
+							.done(function(data) {
+									
+							$("#cancellOrder").html(data);
+						});
+						
+					}); 
+					
+				});
+				
+				//alert("Order has been cancelled");
+				
+				</script>
+				
+		</div> <!-- /class="ui-grid-b" data-type="horizontal" -->
+	 
 	</div><!-- /content -->
 	
 </div><!-- /manager page -->
@@ -313,13 +433,13 @@
 
 
 <div data-role="page" id="customer" data-theme="a">
-
-    <div data-role="header">
+	
+	<div data-role="header">
 			<h1>Customer page</h1>
     </div><!-- /header -->
 	
 	
-	<div class="ui-grid-b">
+	<div id="showOrderButtons" class="ui-grid-b">
 		
 		<div class="ui-block-a"><button class='btn' id="placeAnotherOrder"> Place another order </button></div>
 			
@@ -330,33 +450,16 @@
 	</div>
 	
 	
-	<div class="ui-grid-b id="customerDataHeader">
-		<div class="ui-block-a"></div>
-		<div id="customerDataHeader" class="ui-block-b"><h3> My orders: </h3></div>
-		<div class="ui-block-c"></div>
-	</div>
-	
 	<div id="customerData">
 	
 		<script>
-		$("#placeOrder").hide();
-		$("#hideCustomerOrders").hide();
-		$("#customerDataHeader").hide();
-		$("#customerData").hide();
 		
 		$( "#updateCustomerOrders" ).click(function() {
-		
-			$("#customerDataHeader").show();
-			$("#customerData").show();
-			$("#hideCustomerOrders").show();
-			$("#updateCustomerOrders").hide();
-		
-			var placedby = '';
 			
 			$.post( "/displayCustomer" )
 				.done(function( data ) {
 				
-				//console.log(data);
+				console.log(data);
 				
 				$("#customerData").html(data);
 				
@@ -365,23 +468,19 @@
 		
 		$( "#hideCustomerOrders" ).click(function() {
 		
-			$("#updateCustomerOrders").show();
-			$("#customerDataHeader").hide();
-			$("#customerData").hide();
-			$("#hideCustomerOrders").hide();
+			$( "#customerData" ).hide();
 		    
 		});	
 		
 		</script>
-
 	</div> <!-- /customerData -->
-	
 
     <div role="main" class="ui-content">
-	
+		
+		
 		<div id="orderOptions">
 
-			<div class="ui-grid-b">
+			<div class="ui-grid-b" id="totalData">
 				<div class="ui-block-a"><h2>Pizzas, Sides and drinks</h2></div>
 				<div class="ui-block-b" ><label style="text-align:right;"><b>Total order price, €:</b></label></div>
 				<div class="ui-block-c"><input type="text" id="totalOrderPrice" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px; text-align:right;" value="0"></div>
@@ -391,10 +490,6 @@
 			<div id="pruductsOptions">	
 						
 			</div><!-- /products options -->		
-
-			      
-    		<!--<label for="textarea-1">Customer comments:</label>
-    	 	<textarea name="comments" id="comments"></textarea>-->
      
 			<button id="placeOrder" data-theme="b">Place order </button>
       
@@ -430,214 +525,217 @@
 	</div><!-- /content -->
 	
 
-    
+</div> <!-- /data-role="page" id="customer" data-theme="a" --> 
 
 
 <script>
 // template for a product
 
-class product {
-  constructor(name, price, qty) {
-    this.name = name;
-    this.price = price;
-    this.qty = qty;
-  }
-}
-
-// define our products
-product1 = new product("Hawaiian small", 5.00, 0);
-product2 = new product("Hawaiian medium", 10.00, 0);
-product3 = new product("Hawaiian large", 11.00, 0);
-
-product4 = new product("New Yorker small", 5.00, 0);
-product5 = new product("New Yorker medium", 10.00, 0);
-product6 = new product("New Yorker large", 11.00, 0);
-
-product7 = new product("House Special small", 5.00, 0);
-product8 = new product("House Special medium", 10.00, 0);
-product9 = new product("House Special large", 11.00, 0);
-
-product10 = new product("Custom small", 5.00, 0);
-product11 = new product("Custom medium", 10.00, 0);
-product12 = new product("Custom large", 11.00, 0);
-
-
-product13 = new product("Coca cola 330ml", 1.00, 0);
-product14 = new product("Fanta 330ml", 1.00, 0);
-product15 = new product("Sprite 330ml", 1.00, 0);
-
-product16 = new product("Extra topping ham", 1.00, 0);
-product17 = new product("Extra topping chicken", 1.00, 0);
-product18 = new product("Extra topping pepperoni", 1.00, 0);
-product19 = new product("Extra topping sweetcorn", 1.00, 0);
-product20 = new product("Extra topping peppers", 1.00, 0);
-product21 = new product("Extra topping tomato", 1.00, 0);
-
-product22 = new product("Potato wedges", 5.00, 0);
-product23 = new product("Garlic bread", 5.00, 0);
-
-
-var products = [];
-
-products.push(product1);
-products.push(product2);
-products.push(product3);
-products.push(product4);
-products.push(product5);
-products.push(product6);
-products.push(product7);
-products.push(product8);
-products.push(product9);
-products.push(product10);
-products.push(product11);
-products.push(product12);
-products.push(product13);
-products.push(product14);
-products.push(product15);
-products.push(product16);
-products.push(product17);
-products.push(product18);
-products.push(product19);
-products.push(product20);
-products.push(product21);
-products.push(product22);
-products.push(product23);
-
-console.log(products);
-
-
-var totalOrderPrice = 0;
-
-function makeProducts(){
-
-	var arrayLength = products.length;
-	
-	for (var i = 0; i < arrayLength; i++) { // loop over the products
-
-		var html = 
-		'<input type="text" id="product'+(i+1)+'" data-enhanced="true" value="'+ products[i].name +'" style="width: 200px;">'+
-
-		'<input type="button" id="addProduct'+(i+1)+'" data-inline="true" data-mini="true" data-theme="b" value="+" productname="'+ products[i].name + '" >'+
-													
-		'<input type="text" id="'+ i +'Qty" data-enhanced="true" value="0" style="width: 40px;">'+
-													
-		'<input type="button" id="removeProduct'+(i+1)+'" data-inline="true" data-mini="true" data-theme="b" value="-" productname="' + products[i].name + '" >'+
-
-		'total, €:'+
-											
-		'<input type="text" id="'+i+'Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0">'+
-													
-		'<p>';
-		
-		$( "#pruductsOptions" ).append(html);
-		
+	class product {
+	  constructor(name, price, qty) {
+		this.name = name;
+		this.price = price;
+		this.qty = qty;
+	  }
 	}
-}
 
-makeProducts();
+	// define our products
+	product1 = new product("Hawaiian small", 5.00, 0);
+	product2 = new product("Hawaiian medium", 10.00, 0);
+	product3 = new product("Hawaiian large", 11.00, 0);
+
+	product4 = new product("New Yorker small", 5.00, 0);
+	product5 = new product("New Yorker medium", 10.00, 0);
+	product6 = new product("New Yorker large", 11.00, 0);
+
+	product7 = new product("House Special small", 5.00, 0);
+	product8 = new product("House Special medium", 10.00, 0);
+	product9 = new product("House Special large", 11.00, 0);
+
+	product10 = new product("Custom small", 5.00, 0);
+	product11 = new product("Custom medium", 10.00, 0);
+	product12 = new product("Custom large", 11.00, 0);
 
 
+	product13 = new product("Coca cola 330ml", 1.00, 0);
+	product14 = new product("Fanta 330ml", 1.00, 0);
+	product15 = new product("Sprite 330ml", 1.00, 0);
+
+	product16 = new product("Extra topping ham", 1.00, 0);
+	product17 = new product("Extra topping chicken", 1.00, 0);
+	product18 = new product("Extra topping pepperoni", 1.00, 0);
+	product19 = new product("Extra topping sweetcorn", 1.00, 0);
+	product20 = new product("Extra topping peppers", 1.00, 0);
+	product21 = new product("Extra topping tomato", 1.00, 0);
+
+	product22 = new product("Potato wedges", 5.00, 0);
+	product23 = new product("Garlic bread", 5.00, 0);
 
 
-$('[id^=addProduct]' ).click(function() {
-		
+	var products = [];
+
+	products.push(product1);
+	products.push(product2);
+	products.push(product3);
+	products.push(product4);
+	products.push(product5);
+	products.push(product6);
+	products.push(product7);
+	products.push(product8);
+	products.push(product9);
+	products.push(product10);
+	products.push(product11);
+	products.push(product12);
+	products.push(product13);
+	products.push(product14);
+	products.push(product15);
+	products.push(product16);
+	products.push(product17);
+	products.push(product18);
+	products.push(product19);
+	products.push(product20);
+	products.push(product21);
+	products.push(product22);
+	products.push(product23);
+
+	//console.log(products);
+
+
+	var totalOrderPrice = 0;
+
+	function makeProducts(){
+
 		var arrayLength = products.length;
-
-		var p = $(this).attr('productname'); // find out what was clicked
 		
 		for (var i = 0; i < arrayLength; i++) { // loop over the products
-		
-			var pro = products[i];
-			
-			if(p == pro.name) {
 
-				pro.qty = pro.qty + 1;
-				
-				//product1Qty
-				$( "#"+i+"Qty" ).val(pro.qty);
-				
-				$( "#"+i+"Price" ).val(pro.qty * pro.price);
-				
-				updateCart();
-			}
+			var html = 
+			'<input type="text" id="product'+(i+1)+'" data-enhanced="true" value="'+ products[i].name +'" style="width: 200px;">'+
+
+			'<input type="button" id="addProduct'+(i+1)+'" data-inline="true" data-mini="true" data-theme="b" value="+" productname="'+ products[i].name + '" >'+
+														
+			'<input type="text" id="'+ i +'Qty" data-enhanced="true" value="0" style="width: 40px;">'+
+														
+			'<input type="button" id="removeProduct'+(i+1)+'" data-inline="true" data-mini="true" data-theme="b" value="-" productname="' + products[i].name + '" >'+
+
+			'total, €:'+
+												
+			'<input type="text" id="'+i+'Price" data-wrapper-class="controlgroup-textinput ui-btn" data-enhanced="true" style="width: 80px;"value="0">'+
+														
+			'<p>';
+			
+			$( "#pruductsOptions" ).append(html);
+			
 		}
-	});
+	}
 
-$('[id^=removeProduct]' ).click(function() {
-		
-		var arrayLength = products.length;
+	makeProducts();
 
-		var p = $(this).attr('productname'); // find out what was clicked
-		
-		for (var i = 0; i < arrayLength; i++) { // loop over the products
-		
-			var pro = products[i];
+
+
+
+	$('[id^=addProduct]' ).click(function() {
 			
-			if(p == pro.name) {
-			
-				if (pro.qty > 0) {
+			var arrayLength = products.length;
 
-					pro.qty = pro.qty - 1;
+			var p = $(this).attr('productname'); // find out what was clicked
+			
+			for (var i = 0; i < arrayLength; i++) { // loop over the products
+			
+				var pro = products[i];
+				
+				if(p == pro.name) {
+
+					pro.qty = pro.qty + 1;
 					
 					//product1Qty
 					$( "#"+i+"Qty" ).val(pro.qty);
 					
 					$( "#"+i+"Price" ).val(pro.qty * pro.price);
-
-					updateCart();  
+					
+					updateCart();
 				}
 			}
-		}
-	});
+		});
 
-// function to update the cart.
-function updateCart(){
-	
-	var totalOrderPrice = 0;
+	$('[id^=removeProduct]' ).click(function() {
+			
+			var arrayLength = products.length;
 
-	var arrayLength = products.length;
-
-	for (var i = 0; i < arrayLength; i++) { // loop over the products
-		
-		totalOrderPrice += products[i].qty * products[i].price;
+			var p = $(this).attr('productname'); // find out what was clicked
+			
+			for (var i = 0; i < arrayLength; i++) { // loop over the products
+			
+				var pro = products[i];
 				
-	}		
-	
-	$("#totalOrderPrice").val(totalOrderPrice);
-	
-}
+				if(p == pro.name) {
+				
+					if (pro.qty > 0) {
+
+						pro.qty = pro.qty - 1;
+						
+						//product1Qty
+						$( "#"+i+"Qty" ).val(pro.qty);
+						
+						$( "#"+i+"Price" ).val(pro.qty * pro.price);
+
+						updateCart();  
+					}
+				}
+			}
+		});
+
+	// function to update the cart.
+	function updateCart(){
+		
+		var totalOrderPrice = 0;
+
+		var arrayLength = products.length;
+
+		for (var i = 0; i < arrayLength; i++) { // loop over the products
+			
+			totalOrderPrice += products[i].qty * products[i].price;
+					
+		}		
+		
+		$("#totalOrderPrice").val(totalOrderPrice);
+		
+	}
 
 </script>
 
 
 <script>
-$("#placeAnotherOrder").hide(); // hide order details
-$("#goback").hide(); // hide go back button
-$("#completeOrder").hide(); // hide go complete order button
-$("#complete").hide(); // hide go complete order button
+	
+	$("#showOrderButtons").hide();
+	$("#placeAnotherOrder").hide(); // hide order details
+	$("#goback").hide(); // hide go back button
+	$("#completeOrder").hide(); // hide go complete order button
+	$("#complete").hide(); // hide go complete order button
 
 
+	$("#goback").click(function(){
+		  
+		 $("#showOrderButtons").hide();
+		 $("#pruductsOptions").show();
+		 $("#orderDetails").html(""); // wipe the older order display
+		 //$("#orderDetails").hide(); // hide order details
+		 $("#goback").hide(); // hide go back button
+		 $("#completeOrder").hide(); // hide go complete order button
+		 $("#complete").hide(); // hide go complete order button
+
+	});
 
 
-$("#goback").click(function(){
-	  
-	 $("#pruductsOptions").show();
-     $("#orderDetails").html(""); // wipe the older order display
-	 //$("#orderDetails").hide(); // hide order details
-	 $("#goback").hide(); // hide go back button
-	 $("#completeOrder").hide(); // hide go complete order button
-	 $("#complete").hide(); // hide go complete order button
+	$( "#placeOrder" ).click(function() {
 
-});
-
-
-$( "#placeOrder" ).click(function() {
-
-	$("#complete").show();
-    $("#pruductsOptions").hide(); // hide the order options
-	$("#orderDetails").show(); // show order details
-	$("#goback").show(); // show go back button
-	$("#completeOrder").show(); // hide go complete order button
+		$("#showOrderButtons").hide();
+		$("#placeOrder").hide();
+		$("#complete").show();
+		$("#pruductsOptions").hide(); // hide the order options
+		$("#orderDetails").show(); // show order details
+		$("#goback").show(); // show go back button
+		$("#completeOrder").show(); // hide go complete order button
 	
 	
 	
@@ -647,9 +745,9 @@ $( "#placeOrder" ).click(function() {
 	
     
     var pizza = $("input[name=pizza]").each(function() {
-         if(this.checked == true) { // filter only the ones that we selected.
-              content = content + this.value+'<br>';
-         }
+        if(this.checked == true) { // filter only the ones that we selected.
+            content = content + this.value+'<br>';
+        }
     });
 	
 	var arrayLength = products.length;
@@ -684,85 +782,83 @@ $( "#placeOrder" ).click(function() {
     $.post( "/backend", { type: "getusername"} )
       .done(function( data ) {
         
-        username = data; // whatever data comes back, store it in the username variable
+		username = data; // whatever data comes back, store it in the username variable
         //alert(data);
         
-        content = content + "<p>Thank you for your order " + username +"!";
+		content = content + "<p>Thank you for your order " + username +"!";
     
         // the updateing of the div, is INSIDE the .done function above, as we need to wait to get it back!
         $("#orderDetails").html(content); 
        
-    });
-});
+		});
+	});
 
 
 
-$( "#completeOrder" ).click(function() {
-
+	$( "#completeOrder" ).click(function() {
 	
-    $("#productsOptions").hide(); // hide the order options
-	$("#orderDetails").show(); // show order details
-	$("#goback").show(); // show go back button
-	$("#completeOrder").show(); // hide go complete order button
+		$("#showOrderButtons").hide();
+		$("#productsOptions").hide(); // hide the order options
+		$("#orderDetails").show(); // show order details
+		$("#goback").show(); // show go back button
+		$("#completeOrder").show(); // hide go complete order button
 
-    var placedby = '';
-    
-    $.post( "/backend", { type: "getusername"} )
-      .done(function( data ) {
-        
-        placedby = data; // whatever data comes back, store it in the username variable
+		var placedby = '';
 		
-        //console.log(placedby);
-		
-		
-		var serial = '';
-		
-		var status = 'pending';
-
-		var arrayLength = products.length;
-		
-		for (var i = 0; i < arrayLength; i++) { // loop over the products
-			
-			if (products[i].qty > 0) {
-			
-				serial += products[i].name + '-' +  products[i].qty + '; ';
-				
-				//orderPrice += products[i].qty * products[i].price;
-			}
-		}
-		console.log(serial);
-		
-		var orderPrice = 0;
-		for (var i = 0; i < arrayLength; i++) { // loop over the products
-			
-			orderPrice += products[i].qty * products[i].price;
-		
-		}	
-		
-		console.log(orderPrice);
-		
-		var address = $("#deliveryAddress").val();
-		console.log(address);
-		
-		
-		// jQuery post and send the ser.
-
-		$.post( "/catchTheCart", { placedby: placedby, address: address, ser: serial, orderPrice:orderPrice, status: status })
+		$.post( "/backend", { type: "getusername"} )
 		  .done(function( data ) {
-			//alert( "Data Loaded: " + data );
+			
+			placedby = data; // whatever data comes back, store it in the username variable
+			
+			//console.log(placedby);
+			
+			
+			var serial = '';
+			
+			var status = 'pending';
+
+			var arrayLength = products.length;
+			
+			for (var i = 0; i < arrayLength; i++) { // loop over the products
+				
+				if (products[i].qty > 0) {
+				
+					serial += products[i].name + '-' +  products[i].qty + '; ';
+					
+					//orderPrice += products[i].qty * products[i].price;
+				}
+			}
+			console.log(serial);
+			
+			var orderPrice = 0;
+			for (var i = 0; i < arrayLength; i++) { // loop over the products
+				
+				orderPrice += products[i].qty * products[i].price;
+			
+			}	
+			
+			console.log(orderPrice);
+			
+			var address = $("#deliveryAddress").val();
+			console.log(address);
+			
+			
+			// jQuery post and send the ser.
+
+			$.post( "/catchTheCart", { placedby: placedby, address: address, ser: serial, orderPrice:orderPrice, status: status })
+			  .done(function( data ) {
+				
+				alert( "Your order has been placed, thank you!");
+				
+			});
+			
+			  $("#showOrderButtons").show();
+		
+		   
 		});
 		
 		
-		$("#placeAnotherOrder").show();
-		$("#updateCustomerOrders").show();
-		
-		window.location="/index";
-
-       
-    });
-    
-	
-});
+	});
   
 </script>
 
@@ -806,19 +902,19 @@ $( "#loginButton" ).click(function() {
 
 $( "#registerButton" ).click(function() {
   
-      var un = $( "#register_username" ).val();
-      //console.log(un);
+		var un = $( "#register_username" ).val();
+		//console.log(un);
       
-      var pw = $( "#register_pass" ).val();
-      //console.log(pw);
+		var pw = $( "#register_pass" ).val();
+		//console.log(pw);
       
-	  // didn't copy this function from anywhere, just my logical conclusion
-	  var accountType = "";
-	  $("input[name=radio-choice-h-2]").each(function() {
+		// didn't copy this function from anywhere, just my logical conclusion
+		var accountType = "";
+		$("input[name=radio-choice-h-2]").each(function() {
 			if (this.checked == true){
 				accountType += this.value; 
 			}
-	  });	 
+		});	 
 		console.log(accountType);  
 		
 		// validation

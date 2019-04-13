@@ -46,42 +46,7 @@ class Display extends AbstractController
 		
 	}	
 	
-		/*
-		
-		$output = '<table>'; // html the user will see
-       
-		foreach($orders as $po){
-           
-			$output .= '<tr>'; // one row
-			$output .= '<td>' . $po->getId() . '</td>'; // one column   
-
-//			$output .= '<td>' . $po->getDate()->format('d.m.Y'); . '</td>'; // one column 
-
-
-			$output .= '<td>' . $po->getPlacedby() . '</td>'; // one column  
-			$output .= '<td>' . $po->getOrdered() . '</td>'; // one column 
-			$output .= '<td>' . $po->getTotal() . '</td>'; // one column 
-			$output .= '<td>' . $po->getStatus() . '</td>'; // one column 
-				
-			$output .= '</tr>'; 
-		}
-		
-		
-			
-		$output .= '</table>';
-
-        return new Response(
-            $output
-        );
-		
-		
-        
-    }
 	
-	
-}
-	
-*/	
 	/**
      * @Route("/displayCustomer", name="display_customer") methods={"GET", "POST"}
      */
@@ -94,9 +59,9 @@ class Display extends AbstractController
 				
 		$repo = $this->getDoctrine()->getRepository(Orders::class);
 			
-		$orders = $repo->findBy(['placedby' => $placedby]);
+		$ordersCust = $repo->findBy(['placedby' => $placedby]);
 		
-		if (!$orders) {
+		if (!$ordersCust) {
 			throw $this->createNotFoundException(
 				'No orders found for '.$placedby
 			);
@@ -104,7 +69,32 @@ class Display extends AbstractController
 		
 		else 
 		{
-			return $this->render('orders/customerOrders.html.twig', ['orders'=>$orders]);
+			return $this->render('orders/customerOrders.html.twig', ['orders'=>$ordersCust]);
+		}
+		
+		
+	}
+		
+	
+    /**
+     * @Route("/displayManager", name="display_manager") methods={"GET", "POST"}
+     */
+	 
+    public function displayManagerOrders(SessionInterface $session)
+    {	
+		$repo = $this->getDoctrine()->getRepository(Orders::class);
+			
+		$orders = $repo->findAll();
+		
+		if (!$orders) {
+			throw $this->createNotFoundException(
+				'No orders found '
+			);
+		}
+		
+		else 
+		{
+			return $this->render('orders/managerOrders.html.twig', ['orders'=>$orders]);
 		}
 		
 		
@@ -117,7 +107,7 @@ class Display extends AbstractController
 
 	public function markDelivered(SessionInterface $session)
     {	
-		$request = Request::createFromGlobals(); // the envelope, and were looking inside it.
+		$request = Request::createFromGlobals(); 
 		
 		$entityManager = $this->getDoctrine()->getManager();
 		
@@ -151,28 +141,26 @@ class Display extends AbstractController
 		
 		else 
 		{
-			return $this->render('orders/driverOrders.html.twig', ['orders'=>$orders]);
+			return $this->render('orders/driverOrders.html.twig', ['orders'=>$orders] );
 		}
 
 	}
-		
 	
 	/**
-     * @Route("/deleteOrder", name="deleteOrder"") methods={"GET", "POST"}
+     * @Route("/delete", name="delete") methods={"GET", "POST"}
      */
 
-	public function markDelivered(SessionInterface $session)
+	public function deleteOrder(SessionInterface $session)
     {	
-		$request = Request::createFromGlobals(); // the envelope, and were looking inside it.
+		$request = Request::createFromGlobals(); 
 		
 		$entityManager = $this->getDoctrine()->getManager();
 		
-		// get the variable
 		$orderID = $request->request->get('id', 'none');
 
 		$repo = $this->getDoctrine()->getRepository(Orders::class);
 			
-		$order = $repo->findOneBy(['id' => $orderID]);
+		$order = $repo->findBy(['id' => $orderID]);
 		
 		if (!$order) {
 			throw $this->createNotFoundException(
@@ -185,21 +173,29 @@ class Display extends AbstractController
 		$entityManager->flush();
 		
 		
-		$orders = $repo->findBy(['status' => 'pending']);
+		$orders = $repo->findBy(['status' => 'pending'],
+		['status' => 'delivered']);
 		
-		if (!$orders) {
-			throw $this->createNotFoundException(
-				'No orders found '
-			);
-		}
-		
-		else 
-		{
-			return $this->render('orders/driverOrders.html.twig', ['orders'=>$orders]);
-		}
+		return $this->render('orders/managerOrders.html.twig', ['orders'=>$orders]);
 
 	}
 	
+		
+	/**
+     * @Route("/total", name="totalReport") methods={"GET", "POST"}
+     */
+
+	public function totalReport(SessionInterface $session)
+    {	
+		
+		$manager = $this->getDoctrine()
+			->getRepository(Orders::class)
+			->findTotalOrderdAndRevenue();
+		
+		return $this->render('orders/managerReports.html.twig', ['orders'=>$manager]);
+
+	}
+
 	
 	
 }	

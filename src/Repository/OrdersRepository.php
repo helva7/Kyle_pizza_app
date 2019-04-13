@@ -47,4 +47,33 @@ class OrdersRepository extends ServiceEntityRepository
         ;
     }
     */
+	
+	/**
+     * @return Orders[]
+     */
+	
+	public function findTotalOrderdAndRevenue(): array
+	{
+		$entityManager = $this->getEntityManager();
+		
+		$conn = $this->getEntityManager()->getConnection();
+
+		$sql = '
+			SELECT COUNT(id) as "Total number of orders: ", 
+			SUM(order_price) as "Total revenue: "
+			FROM Orders
+			';
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+
+		// returns an array of arrays (i.e. a raw data set)
+		
+		return $stmt->fetchAll();
+
+		
+	}
+		
+	
+	
+	
 }
