@@ -154,13 +154,12 @@ class Display extends AbstractController
     {	
 		$request = Request::createFromGlobals(); 
 		
+		$orderID = $request->request->get('id', 'none');
+		
 		$entityManager = $this->getDoctrine()->getManager();
 		
-		$orderID = $request->request->get('id', 'none');
-
-		$repo = $this->getDoctrine()->getRepository(Orders::class);
-			
-		$order = $repo->findBy(['id' => $orderID]);
+		$order = $entityManager->getRepository(Orders::class)->find($orderID);
+		
 		
 		if (!$order) {
 			throw $this->createNotFoundException(
@@ -172,9 +171,9 @@ class Display extends AbstractController
 		
 		$entityManager->flush();
 		
+		$repo = $this->getDoctrine()->getRepository(Orders::class);
 		
-		$orders = $repo->findBy(['status' => 'pending'],
-		['status' => 'delivered']);
+		$orders = $repo->findAll();
 		
 		return $this->render('orders/managerOrders.html.twig', ['orders'=>$orders]);
 

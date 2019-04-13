@@ -400,12 +400,14 @@
 				
 				$( "#deleteOrder" ).click(function() {
 				
-					var orderIdManager = "";
+					
 					
 					$("input[type='radio'][name='cancellOrderManager']").each(function(){
 					
+						var orderIdManager = "";
+					
 						if (this.checked == true){
-							orderIdManager += this.value; 
+							orderIdManager = this.value; 
 						}
 						
 						console.log(orderIdManager);
@@ -417,6 +419,8 @@
 						});
 						
 					}); 
+					
+					alert("Order has been deleted");
 					
 				});
 				
@@ -719,7 +723,7 @@
 		 $("#showOrderButtons").hide();
 		 $("#pruductsOptions").show();
 		 $("#orderDetails").html(""); // wipe the older order display
-		 //$("#orderDetails").hide(); // hide order details
+		 $("#placeOrder").show();
 		 $("#goback").hide(); // hide go back button
 		 $("#completeOrder").hide(); // hide go complete order button
 		 $("#complete").hide(); // hide go complete order button
